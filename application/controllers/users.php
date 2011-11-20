@@ -2,16 +2,143 @@
 
 class Users extends CI_Controller {
 
+	public $layout = 'default';
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('user_model', 'user');
+	}
+
 	public function index()
 	{
-		$this->load->view('home');
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			redirect('users/profile');
+		} else {
+			$this->login();
+		}
 	}
 
 	public function register()
 	{
-		$this->load->view('users/form_register');
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			redirect('users/profile');
+		}
+		
+		$data = array();
+		$data['title'] = "S'inscrire";
+
+		$this->form_validation->set_rules('user[name]', 'Pseudo', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('user[email]', 'Email', 'trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('user[password]', 'Mot de passe', 'trim|required|callback_password_check|xss_clean');
+		$this->form_validation->set_rules('user[pass_conf]', 'Confirmation du mot de passe', 'trim|required|xss_clean');
+
+		if($this->form_validation->run()) {
+			extract($this->input->post('user'));
+
+			$data['user'] = array(
+				'username'	=> $name,
+				'email'		=> $email,
+				'password'	=> sha1($password)
+			);
+
+			if($this->user->save($data['user'])) {
+				$data['notif']['type'] = 'success';
+				$data['notif']['message'] = "Inscription réussie.";
+			} else {
+				$data['notif']['type'] = 'warning';
+				$data['notif']['message'] = "Une erreur est survenue au cours de l'opération.";
+			}
+
+			$this->load->view('users/profile/view', $data);
+		} else {
+			$data['notif']['type'] = 'error';
+			$data['notif']['message'] = validation_errors();
+					
+			$this->load->view('users/form_register', $data);
+		}
+	}
+
+	public function login()
+	{
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			redirect('users/profile');
+		}
+
+		$data = array();
+		$data['title'] = "Connexion";
+
+		$this->form_validation->set_rules('user[login]', 'Email', 'trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('user[password]', 'Mot de passe', 'trim|required|xss_clean');
+
+		if($this->form_validation->run())
+		{
+			extract($this->input->post('user'));
+
+			if($this->user->check_id($login, $password))
+			{
+				$_user = $this->user->get_user($login);
+
+				$session_data = array(
+					'username'	=> $_user->username,
+					'email'		=> $login,
+					'id'		=> (int) $user->id,
+					'logged'	=> True
+				);
+
+				$this->session->set_userdata($session_data);
+
+				redirect('users/profile');
+			} else {
+				$data['notif']['type'] = 'error';
+				$data['notif']['message'] = "Votre identifiant / mot de passe est d'incorrect.";
+
+				$this->load->view('users/form_login', $data);
+			}
+		} else {
+			$data['notif']['type'] = 'error';
+			$data['notif']['message'] = validation_errors();
+
+			$this->load->view('users/form_login', $data);
+		}
+	}
+
+	public function profile()
+	{
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			$this->load->view('users/profile/view');
+		} else {
+			redirect('users/register');
+		}
+	}
+
+	public function logout()
+	{
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			$this->session->sess_destroy();
+			redirect(base_url());
+		} else {
+			redirect(base_url());
+		}
+	}
+
+	function password_check($password)
+	{
+		if ($password != $_POST['user']['pass_conf'])
+		{
+			$this->form_validation->set_message('password_check', "Le mot de passe et sa confirmation doivent semblable.");
+			return False;
+		}
+		else {
+			return True;
+		}
 	}
 }
 
-/* End of file home.php */
-/* Location: ./application/controllers/home.php */
+/* End of file users.php */
+/* Location: ./application/controllers/users.php */

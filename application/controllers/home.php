@@ -2,9 +2,13 @@
 
 class Home extends CI_Controller {
 
+	public $layout = 'default';
+
 	public function index()
 	{
-		$this->load->view('home');
+		$data['title'] = "Page d'accueil";
+
+		$this->load->view('home', $data);
 	}
 }
 

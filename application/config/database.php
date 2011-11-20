@@ -66,7 +66,7 @@ $db['default']['stricton'] = FALSE;
 
 $db['other']['hostname'] = 'localhost';
 $db['other']['username'] = 'root';
-$db['other']['password'] = '';
+$db['other']['password'] = 'yupla_159';
 $db['other']['database'] = 'igame';
 $db['other']['dbdriver'] = 'mysql';
 $db['other']['dbprefix'] = '';

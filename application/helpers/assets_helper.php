@@ -2,32 +2,32 @@
 
 if ( ! function_exists('css_url'))
 {
-	function css_url($nom)
+	function css_url($name)
 	{
-		return base_url() . 'assets/css/' . $nom;
+		return base_url() . 'assets/css/' . $name;
 	}
 }
 
 if ( ! function_exists('js_url'))
 {
-	function js_url($nom)
+	function js_url($name)
 	{
-		return base_url() . 'assets/javacript/' . $nom . '.js';
+		return base_url() . 'assets/javascript/' . $name . '.js';
 	}
 }
 
 if ( ! function_exists('img_url'))
 {
-	function img_url($nom)
+	function img_url($name)
 	{
-		return base_url() . 'assets/images/' . $nom;
+		return base_url() . 'assets/images/' . $name;
 	}
 }
 
 if ( ! function_exists('img'))
 {
-	function img($nom, $alt = '')
+	function img($name, $alt = '')
 	{
-		return '<img src="' . img_url($nom) . '" alt="' . $alt . '" />';
+		return '<img src="' . img_url($name) . '" alt="' . $alt . '" />';
 	}
 }
