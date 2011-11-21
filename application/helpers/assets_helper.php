@@ -26,8 +26,8 @@ if ( ! function_exists('img_url'))
 
 if ( ! function_exists('img'))
 {
-	function img($name, $alt = '')
+	function img($name, $alt = '', $title = '', $attributs = '')
 	{
-		return '<img src="' . img_url($name) . '" alt="' . $alt . '" />';
+		return '<img src="' . img_url($name) . '" alt="' . $alt . '" title="'. $title .'"' . $attributs . ' >';
 	}
 }

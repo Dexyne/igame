@@ -14,7 +14,7 @@ class Users extends CI_Controller {
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
-			redirect('users/profile');
+			redirect('users/show');
 		} else {
 			$this->login();
 		}
@@ -24,7 +24,7 @@ class Users extends CI_Controller {
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
-			redirect('users/profile');
+			redirect('users/show');
 		}
 		
 		$data = array();
@@ -65,7 +65,7 @@ class Users extends CI_Controller {
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
-			redirect('users/profile');
+			redirect('users/show');
 		}
 
 		$data = array();
@@ -83,15 +83,15 @@ class Users extends CI_Controller {
 				$_user = $this->user->get_user($login);
 
 				$session_data = array(
-					'username'	=> $_user->username,
+					'username'	=> $_user[0]->username,
 					'email'		=> $login,
-					'id'		=> (int) $user->id,
+					'id'		=> (int) $_user[0]->id,
 					'logged'	=> True
 				);
 
 				$this->session->set_userdata($session_data);
 
-				redirect('users/profile');
+				$this->load->view('users/show');
 			} else {
 				$data['notif']['type'] = 'error';
 				$data['notif']['message'] = "Votre identifiant / mot de passe est d'incorrect.";
@@ -106,13 +106,13 @@ class Users extends CI_Controller {
 		}
 	}
 
-	public function profile()
+	public function show()
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
-			$this->load->view('users/profile/view');
+			$this->load->view('users/show');
 		} else {
-			redirect('users/register');
+			redirect('users/login');
 		}
 	}
 

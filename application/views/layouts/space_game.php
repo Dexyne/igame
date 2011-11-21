@@ -14,8 +14,19 @@
 		<?php require_once '_navigator.php' ?>
 
 		<div class="container">
-			<div class="content">
-				{{ content_for_layout }}	
+			<div class="container-fluid">
+				<div class="sidebar">
+					<ul>
+						<li><?php echo anchor('game/', "Vue générale"); ?></li>
+						<li><?php echo anchor('game/building', "Bâtiments"); ?></li>
+						<li><?php echo anchor('#', "Laboratoire"); ?></li>
+						<li><?php echo anchor('#', "Chantier spatial"); ?></li>
+						<li><?php echo anchor('#', "Défense"); ?></li>
+					</ul>					
+				</div>
+				<div class="content">
+					{{ content_for_layout }}	
+				</div>
 			</div>
 
 			<footer class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</footer>

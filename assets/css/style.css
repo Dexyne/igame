@@ -3,5 +3,13 @@
 }
 
 .content {
-	margin-top: 50px;
+	margin-top: 65px;
+}
+
+.sidebar {
+	margin-top: 75px;
+}
+
+.resources {
+	color: green;
 }

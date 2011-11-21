@@ -2,6 +2,7 @@
 <div class="page-header">
 	<h1>Connexion</h1>
 </div>
+<?php echo anchor('users/register', "Pas encore inscrit ?"); ?>
 
 <?php if(isset($notif)) : echo notif($notif['type'], $notif['message']); else : echo ''; endif; ?>
 
