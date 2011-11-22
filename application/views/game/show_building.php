@@ -25,10 +25,10 @@
 			<dl>
 				<dt>Ressource nécessaire :<dt>
 				<dd>
-					Métal : <?php echo $building->metal ?>
-					Cristal : <?php echo $building->crystal ?>
-					Deutérium : <?php echo $building->deuterium ?>
-					Energie : <?php echo $building->energy ?>
+					<?php if(!is_null($building->metal)) echo img('icons/metal.gif').$building->metal ?>
+					<?php if(!is_null($building->crystal)) echo img('icons/crystal.gif').$building->crystal ?>
+					<?php if(!is_null($building->deuterium)) echo img('icons/deuterium.gif').$building->deuterium ?>
+					<?php if(!is_null($building->energy)) echo img('icons/energy.gif').$building->energy ?>
 				</dd>
 			</dl>
 		</td>
