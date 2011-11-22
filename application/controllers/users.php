@@ -52,7 +52,7 @@ class Users extends CI_Controller {
 				$data['notif']['message'] = "Une erreur est survenue au cours de l'opération.";
 			}
 
-			$this->load->view('users/profile/view', $data);
+			$this->load->view('users/show', $data);
 		} else {
 			$data['notif']['type'] = 'error';
 			$data['notif']['message'] = validation_errors();

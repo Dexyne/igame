@@ -17,7 +17,7 @@
 			<div class="content">
 				{{ content_for_layout }}	
 			</div>
-
+			
 			<footer class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</footer>
 		</div>
 
