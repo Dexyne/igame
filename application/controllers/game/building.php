@@ -24,7 +24,7 @@ class Building extends CI_Controller {
 
 	public function create()
 	{
-		$this->login();
+		redirect('users/login');
 	}
 }
 

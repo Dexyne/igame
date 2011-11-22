@@ -23,13 +23,17 @@
 						<input type="password" name="user[password]" class="input-small" placeholder="Mot de passe">
 						<button class="btn success" type="submit">Connexion</button>
 					<?php echo form_close(); ?>
-				<?php else : ?>
-					<?php echo form_open('users/logout', 'class="pull-right resources"'); ?>
-						<?php echo img('icons/metal.gif') ?>9999
-						<?php echo img('icons/crystal.gif') ?>9999
-						<?php echo img('icons/deuterium.gif') ?>9999
-						<?php echo img('icons/energy.gif') ?>9999
+				<?php else :
+					$data['resources'] = $this->planets_model->get_allResourcesByPlanet(1); 
+					
+					echo form_open('users/logout', 'class="pull-right resources"');
+					foreach($data['resources'] as $resource) : ?>
+						<?php echo img('icons/metal.gif').(int) $resource->metal ?>
+						<?php echo img('icons/crystal.gif').(int) $resource->crystal ?>
+						<?php echo img('icons/deuterium.gif').(int) $resource->deuterium ?>
+						<?php echo img('icons/energy.gif').(int) $resource->energy_used.'/'.(int) $resource->energy_max ?>
 						<?php echo img('icons/message.gif') ?>3
+					<?php endforeach; ?>
 						<button class="btn danger" type="submit">Déconnexion</button>
 					<?php echo form_close(); ?>
 				<?php endif; ?>
