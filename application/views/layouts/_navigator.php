@@ -23,8 +23,19 @@
 						<input type="password" name="user[password]" class="input-small" placeholder="Mot de passe">
 						<button class="btn success" type="submit">Connexion</button>
 					<?php echo form_close(); ?>
-				<?php else :
-					$data['resources'] = $this->planets_model->get_allResourcesByPlanet(1); 
+				<?php else : ?>
+					<ul class="nav">
+						<li class="dropdown">
+					  		<a href="#" class="dropdown-toggle">Dropdown</a>
+					  		<ul class="dropdown-menu">
+								<li><a href="#">Secondary link</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Another link</a></li>
+					  		</ul>
+						</li>
+					</ul>
+					<?php $data['resources'] = $this->planets_model->get_allResourcesByPlanet(1); 
 					
 					echo form_open('users/logout', 'class="pull-right resources"');
 					foreach($data['resources'] as $resource) : ?>
