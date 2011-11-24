@@ -23,19 +23,20 @@
 						<input type="password" name="user[password]" class="input-small" placeholder="Mot de passe">
 						<button class="btn success" type="submit">Connexion</button>
 					<?php echo form_close(); ?>
-				<?php else : ?>
-					<ul class="nav">
-						<li class="dropdown">
-					  		<a href="#" class="dropdown-toggle">Dropdown</a>
-					  		<ul class="dropdown-menu">
-								<li><a href="#">Secondary link</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Another link</a></li>
-					  		</ul>
+				<?php else :
+					$data['planets'] = $this->planet_model->get_allPlanetByuser($this->session->userdata('id'));
+				?>
+					<ul class="topbar">
+						<li class="dropdown" data-dropdown="dropdown" >
+							<a href="#" class="dropdown-toggle">Planètes</a>
+							<ul class="dropdown-menu">
+							<?php foreach($data['planets'] as $planet) : ?>
+								<li><?php echo anchor('game/planets/show/'.$planet->id, $planet->name); ?></li>
+							<?php endforeach; ?>
+							</ul>
 						</li>
 					</ul>
-					<?php $data['resources'] = $this->planets_model->get_allResourcesByPlanet(1); 
+				<?php $data['resources'] = $this->planet_model->get_allResourcesByPlanet($this->session->userdata('planet_id')); 
 					
 					echo form_open('users/logout', 'class="pull-right resources"');
 					foreach($data['resources'] as $resource) : ?>

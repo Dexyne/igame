@@ -32,9 +32,9 @@
 			<footer class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</footer>
 		</div>
 
-		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 		<script type="text/javascript" src="<?php echo js_url('less'); ?>"></script>
 		<script type="text/javascript" src="<?php echo js_url('bootstrap-alerts'); ?>"></script>
-		<script src="<?php echo js_url('/bootstrap-dropdown.js'); ?>"></script>
+		<script src="<?php echo js_url('bootstrap-dropdown'); ?>"></script>
 	</body>
 </html>

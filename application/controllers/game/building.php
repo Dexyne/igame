@@ -28,5 +28,5 @@ class Building extends CI_Controller {
 	}
 }
 
-/* End of file users.php */
-/* Location: ./application/controllers/users.php */
+/* End of file building.php */
+/* Location: ./application/controllers/building.php */
