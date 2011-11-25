@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array( 'planets_model' );
+$autoload['model'] = array( 'planet_model' );
 
 
 /* End of file autoload.php */

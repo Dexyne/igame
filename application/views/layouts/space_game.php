@@ -19,9 +19,9 @@
 					<ul>
 						<li><?php echo anchor('game/', "Vue générale"); ?></li>
 						<li><?php echo anchor('game/building', "Bâtiments"); ?></li>
-						<li><?php echo anchor('#', "Laboratoire"); ?></li>
-						<li><?php echo anchor('#', "Chantier spatial"); ?></li>
-						<li><?php echo anchor('#', "Défense"); ?></li>
+						<li><?php echo anchor('game/', "Laboratoire"); ?></li>
+						<li><?php echo anchor('game/', "Chantier spatial"); ?></li>
+						<li><?php echo anchor('game/', "Défense"); ?></li>
 					</ul>					
 				</div>
 				<div class="content">

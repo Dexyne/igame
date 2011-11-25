@@ -38,4 +38,21 @@ class Planet_model extends CI_Model {
 			->get()
 			->result();
 	}
+
+	public function save($planet_id, $data)
+	{
+		return $this->db->set('user_id', $data['user_id'])
+			->set('name', $data['name'])
+			->set('galaxy', $data['galaxy'])
+			->set('system', $data['system'])
+			->set('planet', $data['planet'])
+			->set('last_update', $data['last_update'], false)
+			->set('metal', $data['metal'])
+			->set('crystal', $data['crystal'])
+			->set('deuterium', $data['deuterium'])
+			->set('energy_used', $data['energy_used'])
+			->set('energy_max', $data['energy_max'])
+			->where('id', $planet_id)
+			->insert($this->_table);
+	}
 }

@@ -86,7 +86,8 @@ class Users extends CI_Controller {
 					'username'	=> $_user[0]->username,
 					'email'		=> $login,
 					'id'		=> (int) $_user[0]->id,
-					'logged'	=> True
+					'logged'	=> True,
+					'planet_id'	=> 1
 				);
 
 				$this->session->set_userdata($session_data);

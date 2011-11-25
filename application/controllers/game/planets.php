@@ -32,11 +32,35 @@ class Planets extends CI_Controller {
 			);
 
 			$this->session->set_userdata($session_data);
+
+			$this->update($data['planet_select']->id, $data['planet_select']);
 		}
 
 		redirect('game/home');
 	}
+
+	public function update($planet_id = '', $data_planet = array())
+	{
+		if(isset($planet_id) && !empty($planet_id))
+		{
+			$data = array(
+				'user_id' 		=> $data_planet->user_id,
+				'name'			=> $data_planet->name,
+				'galaxy'		=> $data_planet->galaxy,
+				'system'		=> $data_planet->system,
+				'planet'		=> $data_planet->planet,
+				'last_update'	=> NOW(),
+				'metal'			=> $data_planet->metal,
+				'crystal'		=> $data_planet->crystal,
+				'deuterium'		=> $data_planet->deuterium,
+				'energy_used'	=> $data_planet->energy_used,
+				'energy_max'	=> $data_planet->energy_max
+			);
+
+			return $this->planet_model->save($planet_id, $data);
+		}
+	}
 }
 
-/* End of file users.php */
-/* Location: ./application/controllers/users.php */
+/* End of file planets.php */
+/* Location: ./application/controllers/planets.php */
