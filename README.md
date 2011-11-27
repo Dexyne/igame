@@ -1,1 +1,1 @@
-Jeu basé sur OGame.
+Jeu basé sur [Ogame](http://www.ogame.org/).
