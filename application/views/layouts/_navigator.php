@@ -36,7 +36,13 @@
 							</ul>
 						</li>
 					</ul>
-				<?php $data['resources'] = $this->planet_model->get_allResourcesByPlanet($this->session->userdata('planet_id')); 
+				<?php
+					$data_planet = current($this->planet_model->get_planet($this->session->userdata('planet_id')));
+					require_once('./application/controllers/game/planets.php');
+					$planet = new Planets();
+					$planet->edit($data_planet->id);
+					
+					$data['resources'] = $this->planet_model->get_allResourcesByPlanet($this->session->userdata('planet_id')); 
 					
 					echo form_open('users/logout', 'class="pull-right resources"');
 					foreach($data['resources'] as $resource) : ?>

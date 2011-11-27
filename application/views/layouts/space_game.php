@@ -30,6 +30,17 @@
 			</div>
 			
 			<footer class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</footer>
+			<?php
+			$datetime1 = new DateTime(date('Y-m-d H:i:s'));
+			$datetime2 = new DateTime('2011-11-26 16:00:00');
+			$interval = $datetime1->diff($datetime2);
+			echo '<pre>';
+			print_r($interval);
+			echo '</pre>';
+			echo $interval->format('%R %y an(s) %m mois %d jour(s) %h:%i:%s');
+			echo '<br>';
+			echo $interval->format('days');
+			?>
 		</div>
 
 		<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
