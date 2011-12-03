@@ -15,7 +15,7 @@ class Building extends CI_Controller {
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
 			$data['building_list'] = $this->building->get_allBuilding();
-			$data['building_level'] = $this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_sintetizer, solar_plant');
+			$data['building_level'] = $this->planet_model->get_planet($this->session->userdata('id_planet'), 'metal_mine, crystal_mine, deuterium_sintetizer, solar_plant');
 
 			$this->load->view('game/show_building', $data);
 		} else {

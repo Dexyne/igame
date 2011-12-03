@@ -53,15 +53,9 @@ class Planets extends CI_Controller {
 			$last_update = new DateTime($data_planet->last_update);
 			$interval = $today->diff($last_update);
 
-			if($interval->days > 0) {
-				$hours = $interval->days * 24 + $interval->h;
-				$minutes = $hours * 60 + $interval->i;
-				$seconds = $minutes * 60 + $interval->s;
-			} else {
-				$hours = $interval->h;
-				$minutes = $hours * 60 + $interval->i;
-				$seconds = $minutes * 60 + $interval->s;
-			}
+			$hours = $interval->days * 24 + $interval->h;
+			$minutes = $hours * 60 + $interval->i;
+			$seconds = $minutes * 60 + $interval->s;
 
 			$data = array(
 				'user_id' 		=> $data_planet->user_id,
@@ -69,6 +63,7 @@ class Planets extends CI_Controller {
 				'galaxy'		=> $data_planet->galaxy,
 				'system'		=> $data_planet->system,
 				'planet'		=> $data_planet->planet,
+				//'created_at'	=> $data_planet->created_at,
 				'last_update'	=> 'NOW()',
 				'metal'			=> $data_planet->metal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
 				'crystal'		=> $data_planet->crystal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
