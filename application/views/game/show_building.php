@@ -33,14 +33,9 @@
 			</dl>
 		</td>
 		<td class="center">
-		<?php if($building->name_clean == 'metal_mine'):
-			print_r($building_level);
-		endif; ?>
+			<?php echo $building->level ?>
 		</td>
 		<td><?php echo anchor("game/building/create/{$building->id}", "Construire ?"); ?></td>
 	</tr>
 <?php endforeach; ?>		
 </table>
-
-<?php echo '<pre>'; print_r($building_list); echo '</pre>'; ?>
-<?php echo '<pre>'; print_r($building_level); echo '</pre>'; ?>
