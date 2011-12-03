@@ -42,7 +42,6 @@ class Planets extends CI_Controller {
 	public function edit($planet_id = '')
 	{
 		// Level du batiment, est normalement enregistrer en db, ici c'est pour les tests
-		// (20 * $building_metal * pow((1.1), $building_metal))
 		$building_metal = 2;
 		$metal_per_hour = 50;
 
@@ -50,13 +49,19 @@ class Planets extends CI_Controller {
 			// On récupère les données actuelles de la planète
 			$data_planet = current($this->planet_model->get_planet($planet_id));
 
-			$datetime1 = new DateTime(date('Y-m-d H:i:s'));
-			$datetime2 = new DateTime($data_planet->last_update);
-			$interval = $datetime1->diff($datetime2);
-			/*
-			| Reste à récupérer le temps en integer (ou timestamp) puis à le soustraire au calcul de ressource (ou le diviser)
-			| Si %d < 1 (ou == 0) (soit moins d'un jour) on prend les heures sinon directement [days] pour le nombre total de jours.
-			*/
+			$today = new DateTime(date('Y-m-d H:i:s'));
+			$last_update = new DateTime($data_planet->last_update);
+			$interval = $today->diff($last_update);
+
+			if($interval->days > 0) {
+				$hours = $interval->days * 24 + $interval->h;
+				$minutes = $hours * 60 + $interval->i;
+				$seconds = $minutes * 60 + $interval->s;
+			} else {
+				$hours = $interval->h;
+				$minutes = $hours * 60 + $interval->i;
+				$seconds = $minutes * 60 + $interval->s;
+			}
 
 			$data = array(
 				'user_id' 		=> $data_planet->user_id,
@@ -65,9 +70,9 @@ class Planets extends CI_Controller {
 				'system'		=> $data_planet->system,
 				'planet'		=> $data_planet->planet,
 				'last_update'	=> 'NOW()',
-				'metal'			=> $data_planet->metal + (20 * $building_metal * pow((1.1), $building_metal)),
-				'crystal'		=> $data_planet->crystal + (15 * $building_metal * pow((1.1), $building_metal)),
-				'deuterium'		=> $data_planet->deuterium + (10 * $building_metal * pow((1.1), $building_metal)),
+				'metal'			=> $data_planet->metal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
+				'crystal'		=> $data_planet->crystal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
+				'deuterium'		=> $data_planet->deuterium + ($building_metal * $metal_per_hour * ($seconds / 3600)),
 				'energy_used'	=> $data_planet->energy_used,
 				'energy_max'	=> $data_planet->energy_max
 			);
