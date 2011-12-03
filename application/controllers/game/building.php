@@ -15,6 +15,7 @@ class Building extends CI_Controller {
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
 			$data['building_list'] = $this->building->get_allBuilding();
+			$data['building_level'] = $this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_sintetizer, solar_plant');
 
 			$this->load->view('game/show_building', $data);
 		} else {
@@ -22,9 +23,23 @@ class Building extends CI_Controller {
 		}
 	}
 
-	public function create()
+	public function create($id = '')
 	{
-		redirect('users/login');
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			$data = array();
+
+			if(isset($id) && ctype_digit($id)) {
+				$data['notif']['type'] = 'success';
+				$data['notif']['message'] = "Bâtiment en cours de construction.";
+
+
+			} else {
+				$this->index();
+			}
+		} else {
+			redirect('users/login');
+		}
 	}
 }
 

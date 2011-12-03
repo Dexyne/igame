@@ -33,9 +33,13 @@ class Planet_model extends CI_Model {
 	}
 
 	// Retourne les données de la planète demandé
+<<<<<<< HEAD
 	public function get_planet($planet_id)
+=======
+	public function get_planet($planet_id, $select = '*')
+>>>>>>> building
 	{
-		return $this->db->select('*')
+		return $this->db->select($select)
 			->from($this->_table)
 			->where('id', $planet_id)
 			->get()
