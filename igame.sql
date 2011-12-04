@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Mer 23 Novembre 2011 à 00:32
+-- Généré le : Dim 04 Décembre 2011 à 18:52
 -- Version du serveur: 5.1.49
 -- Version de PHP: 5.3.3-7+squeeze3
 
@@ -73,8 +73,8 @@ CREATE TABLE IF NOT EXISTS `igame_sessions` (
 --
 
 INSERT INTO `igame_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('28d2bc49ef2e4915d03061215420c04d', '192.168.233.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22', 1321988715, 'a:5:{s:9:"user_data";s:0:"";s:8:"username";s:4:"test";s:5:"email";s:12:"test@mail.fr";s:2:"id";i:1;s:6:"logged";b:1;}'),
-('a95c84076365f765c7a7e54c3f80d75c', '192.168.233.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22', 1322004619, 'a:4:{s:8:"username";s:4:"test";s:5:"email";s:12:"test@mail.fr";s:2:"id";i:1;s:6:"logged";b:1;}');
+('934ccf3603ab9e215080273dd7680e9a', '192.168.233.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2', 1323017309, 'a:6:{s:9:"user_data";s:0:"";s:8:"username";s:4:"test";s:5:"email";s:12:"test@mail.fr";s:2:"id";i:1;s:6:"logged";b:1;s:9:"planet_id";s:1:"1";}'),
+('91594b70f9c40ba1f322e089b8fba4bf', '192.168.233.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2', 1323020996, 'a:6:{s:9:"user_data";s:0:"";s:8:"username";s:4:"test";s:5:"email";s:12:"test@mail.fr";s:2:"id";i:1;s:6:"logged";b:1;s:9:"planet_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
@@ -88,12 +88,18 @@ CREATE TABLE IF NOT EXISTS `planets` (
   `name` varchar(255) NOT NULL,
   `galaxy` tinyint(2) NOT NULL,
   `system` tinyint(2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
   `planet` tinyint(2) NOT NULL,
   `metal` double(132,8) NOT NULL DEFAULT '0.00000000',
   `crystal` double(132,8) NOT NULL DEFAULT '0.00000000',
   `deuterium` double(132,8) NOT NULL DEFAULT '0.00000000',
   `energy_used` int(11) NOT NULL,
   `energy_max` int(11) NOT NULL,
+  `metal_mine` int(11) NOT NULL,
+  `crystal_mine` int(11) NOT NULL,
+  `deuterium_sintetizer` int(11) NOT NULL,
+  `solar_plant` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -101,9 +107,40 @@ CREATE TABLE IF NOT EXISTS `planets` (
 -- Contenu de la table `planets`
 --
 
-INSERT INTO `planets` (`id`, `user_id`, `name`, `galaxy`, `system`, `planet`, `metal`, `crystal`, `deuterium`, `energy_used`, `energy_max`) VALUES
-(1, 1, 'planète de test', 1, 1, 1, 500.00000000, 500.00000000, 500.00000000, 20, 100),
-(2, 1, 'youpi', 1, 1, 3, 1000.70000000, 4000.00000000, 500.00000000, 50, 50);
+INSERT INTO `planets` (`id`, `user_id`, `name`, `galaxy`, `system`, `created_at`, `updated_at`, `planet`, `metal`, `crystal`, `deuterium`, `energy_used`, `energy_max`, `metal_mine`, `crystal_mine`, `deuterium_sintetizer`, `solar_plant`) VALUES
+(1, 1, 'planète de test', 1, 1, '2011-12-01 00:00:00', '2011-12-04 18:50:00', 1, 8470.46508907, 9404.82777778, 8969.22777778, 20, 100, 1, 0, 0, 3),
+(2, 1, 'youpi', 1, 1, '2011-12-02 00:00:00', '2011-12-04 18:49:58', 3, 14015.55555555, 16990.65555555, 13466.45555555, 50, 50, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `queue`
+--
+
+CREATE TABLE IF NOT EXISTS `queue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `element_id` int(11) NOT NULL,
+  `planet_id` int(11) NOT NULL,
+  `time_start` datetime NOT NULL,
+  `time_finish` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Contenu de la table `queue`
+--
+
+INSERT INTO `queue` (`id`, `element_id`, `planet_id`, `time_start`, `time_finish`) VALUES
+(1, 1, 1, '2011-12-04 17:52:43', '0000-00-00 00:00:00'),
+(2, 1, 1, '2011-12-04 17:53:15', '0000-00-00 00:00:00'),
+(3, 1, 1, '2011-12-04 18:06:21', '2011-12-04 18:06:21'),
+(4, 1, 1, '2011-12-04 18:07:10', '2011-12-04 18:07:10'),
+(5, 1, 1, '2011-12-04 18:07:11', '2011-12-04 18:07:11'),
+(6, 1, 1, '2011-12-04 18:21:12', '2011-12-04 18:21:12'),
+(7, 1, 1, '2011-12-04 18:21:45', '2011-12-04 18:21:45'),
+(8, 1, 1, '2011-12-04 18:24:52', '2011-12-04 18:24:52'),
+(9, 1, 1, '2011-12-04 18:40:23', '2011-12-04 18:40:23'),
+(10, 1, 1, '2011-12-04 18:40:31', '2011-12-04 18:40:31');
 
 -- --------------------------------------------------------
 
@@ -151,11 +188,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'test', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'test@mail.fr', '2011-11-21 19:38:00', '2011-11-21 19:38:00');
+(1, 'test', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'test@mail.fr', '2011-11-21 19:38:00', '2011-11-21 19:38:00'),
+(2, 'machin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'machin@mail.fr', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
