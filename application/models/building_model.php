@@ -11,4 +11,14 @@ class Building_model extends CI_Model {
 			->get()
 			->result();
 	}
+
+	// Retourne les données du bâtiment demandé
+	public function get_building($id, $select = '*')
+	{
+		return $this->db->select($select)
+			->from($this->_table)
+			->where('id', $id)
+			->get()
+			->result();
+	}
 }

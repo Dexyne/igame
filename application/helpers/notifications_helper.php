@@ -14,5 +14,5 @@ if ( ! function_exists('notif'))
 	}
 }
 
-/* End of file errors_message_helper.php */
-/* Location: ./application/helpers/errors_message_helper.php */
+/* End of file notifications_helper.php */
+/* Location: ./application/helpers/notifications_helper.php */
