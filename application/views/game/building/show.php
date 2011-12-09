@@ -3,6 +3,20 @@
 	<h1>Bâtiments</h1>
 </div>
 
+<div class="alert-message warning" data-alert="alert">
+<?php if(isset($in_queue) && !empty($in_queue)) : ?>
+		<ul>
+		<?php foreach($in_queue as $in) : 
+			for($i = 0; $i < count($building_list); $i++) :
+				if($in->element_id == $building_list[$i]->id): ?>
+					<li><?php echo $building_list[$i]->name ?></li>
+		<?php endif; endfor; endforeach; ?>
+		</ul>
+<?php else : ?>
+		<p>Aucun bâtiment en cours de construction.</p>
+<?php endif; ?>
+</div>
+
 <?php if(isset($notif)) : echo notif($notif['type'], $notif['message']); endif; ?>
 
 <table>

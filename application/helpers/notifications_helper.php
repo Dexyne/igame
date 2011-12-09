@@ -14,5 +14,22 @@ if ( ! function_exists('notif'))
 	}
 }
 
+if ( ! function_exists('notif_list'))
+{
+	function notif_list($notif = '', $message = null)
+	{
+		if(isset($notif) && !empty($notif) && isset($message) && !empty($message)) {
+			$notification = "<ul>";
+			foreach($message as $val) {
+				$notification .= "<li>{$message}</li>";
+			}
+			$notification .= "</ul>";
+
+			return $notification;
+		}	
+	}
+}
+
+
 /* End of file notifications_helper.php */
 /* Location: ./application/helpers/notifications_helper.php */

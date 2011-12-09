@@ -29,6 +29,8 @@ class Building extends CI_Controller {
 				$data['building_list'][$i]->level = $building_level->$b[$i];
 			}
 
+			$data['in_queue'] = $this->queue->into('building');
+
 			$this->load->view('game/building/show', $data);
 		} else {
 			$this->login();
@@ -52,14 +54,14 @@ class Building extends CI_Controller {
 				if(isset($building_select) && !empty($building_select)) {
 					// mktime(int hour, int minute, int second, int month, int day, int year)
 					$date_now_in_tsp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));
-					$date_finish_in_tsp = $date_now_in_timestamp + $building_select->construct_time;
+					$date_finish_in_tsp = $date_now_in_tsp + $building_select->construct_time;
 
 					$data = array(
 						'element_id'	=> $id,
 						'element_type'	=> 'building',
 						'planet_id'		=> $this->session->userdata('planet_id'),
-						'time_start'	=> date('Y-m-d H:i:s'),
-						'time_finish'	=> date('Y-m-d H:i:s', $date_finish_in_tsp)
+						'time_start'	=> 'NOW()',
+						'time_finish'	=> '\''.date('Y-m-d H:i:s', $date_finish_in_tsp).'\''
 					);					
 
 					if($this->queue->insert($data)) {

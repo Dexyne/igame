@@ -13,4 +13,13 @@ class Queue_model extends CI_Model {
 			->set('time_finish', $data['time_finish'], false)
 			->insert($this->_table);
 	}
+
+	public function into($type = '')
+	{
+		return $this->db->select('*')
+			->from($this->_table)
+			->where('element_type', $type)
+			->get()
+			->result();
+	}
 }
