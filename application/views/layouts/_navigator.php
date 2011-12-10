@@ -40,11 +40,11 @@
 					
 					echo form_open('users/logout', 'class="pull-right resources"');
 					foreach($data['resources'] as $resource) : ?>
-						<?php echo img('icons/metal.gif').(int) $resource->metal ?>
-						<?php echo img('icons/crystal.gif').(int) $resource->crystal ?>
-						<?php echo img('icons/deuterium.gif').(int) $resource->deuterium ?>
-						<?php echo img('icons/energy.gif').(int) $resource->energy_used.'/'.(int) $resource->energy_max ?>
-						<?php echo img('icons/message.gif') ?>3
+						<?php echo img('icons/metal.gif', '', 'Métal').(int) $resource->metal ?>
+						<?php echo img('icons/crystal.gif', '', 'Cristal').(int) $resource->crystal ?>
+						<?php echo img('icons/deuterium.gif', '', 'Deutérium').(int) $resource->deuterium ?>
+						<?php echo img('icons/energy.gif', '', 'Energie').(int) $resource->energy_used.'/'.(int) $resource->energy_max ?>
+						<?php echo img('icons/message.gif', '', 'Message(s)') ?>3
 					<?php endforeach; ?>
 						<button class="btn danger" type="submit">Déconnexion</button>
 					<?php echo form_close(); ?>
