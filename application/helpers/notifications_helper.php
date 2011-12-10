@@ -14,6 +14,7 @@ if ( ! function_exists('notif'))
 	}
 }
 
+// Non fonctionnel, No functional
 if ( ! function_exists('notif_list'))
 {
 	function notif_list($notif = '', $message = null)
