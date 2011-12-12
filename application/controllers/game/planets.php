@@ -19,6 +19,11 @@ class Planets extends CI_Controller {
 		}
 	}
 
+	/**
+	 | Affiche la planète sélectionner et ses données
+	 * @param (int) $planet_id
+	 * @return view
+	 */
 	public function show($id = '')
 	{
 		$data = array();
@@ -39,6 +44,11 @@ class Planets extends CI_Controller {
 		redirect('game/home');
 	}
 
+	/**
+	 | Permet l'édition d'une planète et sa mise à jour
+	 * @param (int) $planet_id
+	 * @return Boolean OR view
+	 */
 	public function edit($planet_id = '')
 	{
 		// Level du batiment, est normalement enregistrer en db, ici c'est pour les tests
