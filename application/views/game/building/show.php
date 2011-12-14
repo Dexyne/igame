@@ -9,7 +9,10 @@
 		<?php foreach($in_queue as $in) : 
 			for($i = 0; $i < count($building_list); $i++) :
 				if($in->element_id == $building_list[$i]->id): ?>
-					<li><?php echo $building_list[$i]->name ?></li>
+					<li class="construction" data-id="<?php echo $in->id ?>" data-finish-at="<?php echo $in->time_finish ?>">
+						<?php echo $building_list[$i]->name ?><span class="pull-right">
+						Temps restant : <span class="remaining-time">...</span></span>
+					</li>
 		<?php endif; endfor; endforeach; ?>
 		</ul>
 <?php else : ?>
@@ -39,10 +42,10 @@
 			<dl>
 				<dt>Ressource nécessaire :<dt>
 				<dd>
-					<?php if(!is_null($building->metal)) echo img('icons/metal.gif').$building->metal ?>
-					<?php if(!is_null($building->crystal)) echo img('icons/crystal.gif').$building->crystal ?>
-					<?php if(!is_null($building->deuterium)) echo img('icons/deuterium.gif').$building->deuterium ?>
-					<?php if(!is_null($building->energy)) echo img('icons/energy.gif').$building->energy ?>
+					<?php if(!is_null($building->metal)) echo img('icons/metal.gif', '', 'Métal').$building->metal ?>
+					<?php if(!is_null($building->crystal)) echo img('icons/crystal.gif', '', 'Cristal').$building->crystal ?>
+					<?php if(!is_null($building->deuterium)) echo img('icons/deuterium.gif', '', 'Deutérium').$building->deuterium ?>
+					<?php if(!is_null($building->energy)) echo img('icons/energy.gif', '', 'Energie').$building->energy ?>
 				</dd>
 			</dl>
 		</td>
