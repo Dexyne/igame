@@ -12,10 +12,10 @@ class Building extends CI_Controller {
 	}
 
 	/**
-	| Affiche la liste de tous les bâtiments disponible
-	| @param $data = array()
-	| @return une vue
-	**/
+	 | Affiche la liste de tous les bâtiments disponible et ceux en construction
+	 * @param $data = array()
+	 * @return view
+	 */
 	public function index($data = array())
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
@@ -29,7 +29,7 @@ class Building extends CI_Controller {
 				$data['building_list'][$i]->level = $building_level->$b[$i];
 			}
 
-			$data['in_queue'] = $this->queue->into('building');
+			$data['in_queue'] = $this->queue->into('building', $this->session->userdata('planet_id'));
 
 			$this->load->view('game/building/show', $data);
 		} else {
@@ -38,10 +38,10 @@ class Building extends CI_Controller {
 	}
 
 	/**
-	| Permet la construction d'un bâtiment
-	| @param $id du bâtiment
-	| @return une vue
-	**/
+	 | Permet la construction d'un bâtiment
+	 * @param $id du bâtiment
+	 * @return view
+	 */
 	public function create($id = '')
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
