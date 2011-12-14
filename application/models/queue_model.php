@@ -14,12 +14,27 @@ class Queue_model extends CI_Model {
 			->insert($this->_table);
 	}
 
-	public function into($type = '')
+	public function into($type, $planet_id, $select = '*')
 	{
-		return $this->db->select('*')
+		return $this->db->select($select)
 			->from($this->_table)
 			->where('element_type', $type)
+			->where('planet_id', $planet_id)
 			->get()
 			->result();
+	}
+
+	public function get_element($id, $select = '*')
+	{
+		return $this->db->select($select)
+			->from($this->_table)
+			->where('id', $id)
+			->get()
+			->result();
+	}
+
+	public function delete($id)
+	{
+		$this->db->delete($this->_table, array('id' => $id)); 
 	}
 }
