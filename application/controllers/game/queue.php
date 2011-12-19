@@ -9,7 +9,7 @@ class Queue extends CI_Controller {
 		$this->load->model('building_model', 'building');
 	}
 
-	public function update($id = '')
+	public function edit($id = '')
 	{
 		if(isset($id) && !empty($id) && ctype_digit($id)) {
 			$element = current($this->queue->get_element($id));
