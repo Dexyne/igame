@@ -14,7 +14,7 @@ $(function(){
 				id = $construction.data("id");
 
 				$.ajax({
-					url: 		'queue/update/' + id,
+					url: 		'queue/edit/' + id,
 					success: 	function(){
 						document.location.href = "http://192.168.233.129:2001/index.php/game/building.html";
 					}
