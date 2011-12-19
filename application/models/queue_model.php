@@ -37,4 +37,9 @@ class Queue_model extends CI_Model {
 	{
 		$this->db->delete($this->_table, array('id' => $id)); 
 	}
+
+	public function update()
+	{
+		
+	}
 }
