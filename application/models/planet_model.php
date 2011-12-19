@@ -76,6 +76,10 @@ class Planet_model extends CI_Model {
 			->set('deuterium', $data['deuterium'])
 			->set('energy_used', $data['energy_used'])
 			->set('energy_max', $data['energy_max'])
+			->set('metal_mine', $data['metal_mine'])
+			->set('crystal_mine', $data['crystal_mine'])
+			->set('deuterium_sintetizer', $data['deuterium_sintetizer'])
+			->set('solar_plant', $data['solar_plant'])
 			->where('id', $id)
 			->update($this->_table);
 	}
