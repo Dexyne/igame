@@ -9,7 +9,7 @@ RewriteEngine on
 #
 
 #   Toutes les URL qui ne correspondent pas à ces masques sont réécrites.
-RewriteCond $1 !^(index\.php|assets/|robots\.txt|forum/)
+RewriteCond $1 !^(index\.php|assets/|robots\.txt)
 
 #   Toutes les autres URL vont être redirigées vers le fichier index.php
 RewriteRule ^(.*)$ index.php/$1			[L]
