@@ -68,18 +68,22 @@ class Planets extends CI_Controller {
 			$seconds = $minutes * 60 + $interval->s;
 
 			$data = array(
-				'user_id' 		=> $data_planet->user_id,
-				'name'			=> $data_planet->name,
-				'galaxy'		=> $data_planet->galaxy,
-				'system'		=> $data_planet->system,
-				'planet'		=> $data_planet->planet,
-				'created_at'	=> $data_planet->created_at,
-				'updated_at'	=> 'NOW()',
-				'metal'			=> $data_planet->metal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
-				'crystal'		=> $data_planet->crystal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
-				'deuterium'		=> $data_planet->deuterium + ($building_metal * $metal_per_hour * ($seconds / 3600)),
-				'energy_used'	=> $data_planet->energy_used,
-				'energy_max'	=> $data_planet->energy_max
+				'user_id' 				=> $data_planet->user_id,
+				'name'					=> $data_planet->name,
+				'galaxy'				=> $data_planet->galaxy,
+				'system'				=> $data_planet->system,
+				'planet'				=> $data_planet->planet,
+				'created_at'			=> $data_planet->created_at,
+				'updated_at'			=> 'NOW()',
+				'metal'					=> $data_planet->metal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
+				'crystal'				=> $data_planet->crystal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
+				'deuterium'				=> $data_planet->deuterium + ($building_metal * $metal_per_hour * ($seconds / 3600)),
+				'energy_used'			=> $data_planet->energy_used,
+				'energy_max'			=> $data_planet->energy_max,
+				'metal_mine'			=> $data_planet->metal_mine,
+				'crystal_mine'			=> $data_planet->crystal_mine,
+				'deuterium_sintetizer'	=> $data_planet->deuterium_sintetizer,
+				'solar_plant'			=> $data_planet->solar_plant
 			);
 
 			// On met à jour les données de la planète
