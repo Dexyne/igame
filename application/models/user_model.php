@@ -39,6 +39,17 @@ class User_model extends CI_Model {
 			->insert($this->_table);
 	}
 
+	public function update($id, $data) 
+	{
+		return $this->db->set('username', $data['username'])
+			->set('email', $data['email'])
+			->set('password', $data['password'])
+			->set('created_at', $data['created_at'])
+			->set('updated_at', $data['updated_at'], false)
+			->where('id', $id)
+			->update($this->_table);
+	}
+
 	public function check_id($email, $password)
 	{
 		$this->db->where('email', $email);
@@ -53,8 +64,6 @@ class User_model extends CI_Model {
 
 	public function get_user($email, $id = '')
 	{
-		/*$this->db->where('email', $email);
-		return $this->db->get('users');*/
 		return $this->db->select('*')
 			->from($this->_table)
 			->where('email', $email)
