@@ -82,7 +82,7 @@ class Building extends CI_Controller {
 				if(isset($building_type) && !empty($building_type)) {
 					// mktime(int hour, int minute, int second, int month, int day, int year)
 					$date_now_in_tsp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));
-					$date_finish_in_tsp = $date_now_in_tsp + ($building_type->construct_time * ((($building->level > 0) ? $building->level : 1) + 1) * $building_type->multiplier);
+					$date_finish_in_tsp = $date_now_in_tsp + ($building_type->construct_time * ($building->level + 1) * $building_type->multiplier);
 
 					$data = array(
 						'element_id'	=> $id,
