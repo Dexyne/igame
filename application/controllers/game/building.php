@@ -74,12 +74,15 @@ class Building extends CI_Controller {
 			$data = array();
 
 			if(isset($id) && ctype_digit($id)) {
-				$building_select = current($this->building->get_building($id, 'name, construct_time'));
+				$building_type = current($this->building->get_building($id, 'name, name_clean, construct_time, multiplier'));
+				$building_name = $building_type->name_clean;
+				$building = current($this->planet_model->get_planet($this->session->userdata('planet_id'), $building_name));
+				$building->level = $building->$building_name;
 
-				if(isset($building_select) && !empty($building_select)) {
+				if(isset($building_type) && !empty($building_type)) {
 					// mktime(int hour, int minute, int second, int month, int day, int year)
 					$date_now_in_tsp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));
-					$date_finish_in_tsp = $date_now_in_tsp + $building_select->construct_time;
+					$date_finish_in_tsp = $date_now_in_tsp + ($building_type->construct_time * ((($building->level > 0) ? $building->level : 1) + 1) * $building_type->multiplier);
 
 					$data = array(
 						'element_id'	=> $id,
@@ -91,7 +94,7 @@ class Building extends CI_Controller {
 
 					if($this->queue->insert($data)) {
 						$data['notif']['type'] = 'success';
-						$data['notif']['message'] = "{$building_select->name} en cours de construction.";
+						$data['notif']['message'] = "{$building_type->name} en cours de construction.";
 					} else {
 						$data['notif']['type'] = 'error';
 						$data['notif']['message'] = "Une erreur est survenue.";

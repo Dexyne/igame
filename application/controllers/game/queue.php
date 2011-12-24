@@ -44,6 +44,7 @@ class Queue extends CI_Controller {
 			if(isset($element) && $element->planet_id == $this->session->userdata('planet_id')) {
 
 				$planet = current($this->planet_model->get_planet($this->session->userdata('planet_id')));
+				$building = current($this->building->get_building($element->element_id));
 
 				$data = array(
 					'user_id' 				=> $planet->user_id,
@@ -53,11 +54,11 @@ class Queue extends CI_Controller {
 					'planet'				=> $planet->planet,
 					'created_at'			=> $planet->created_at,
 					'updated_at'			=> 'NOW()',
-					'metal'					=> $planet->metal,
-					'crystal'				=> $planet->crystal,
-					'deuterium'				=> $planet->deuterium,
-					'energy_used'			=> $planet->energy_used,
-					'energy_max'			=> $planet->energy_max,
+					'metal'					=> $planet->metal - ($building->metal * ($building->level + 1) * $building->multiplier),
+					'crystal'				=> $planet->crystal - ($building->crystal * ($building->level + 1) * $building->multiplier),
+					'deuterium'				=> $planet->deuterium - ($building->deuterium * ($building->level + 1) * $building->multiplier),
+					'energy_used'			=> $planet->energy_used + ($building->energy * ($building->level + 1) * $building->multiplier),
+					'energy_max'			=> $planet->energy_max + (($element_type->name_clean === 'solar_plant') ? (20 * ($building->level + 1) * $building->multiplier) : 0),
 					'metal_mine'			=> $planet->metal_mine + (($element_type->name_clean === 'metal_mine') ? 1 : 0),
 					'crystal_mine'			=> $planet->crystal_mine + (($element_type->name_clean === 'crystal_mine') ? 1 : 0),
 					'deuterium_sintetizer'	=> $planet->deuterium_sintetizer + (($element_type->name_clean === 'deuterium_sintetizer') ? 1 : 0),
