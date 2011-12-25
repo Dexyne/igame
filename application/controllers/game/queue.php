@@ -61,7 +61,7 @@ class Queue extends CI_Controller {
 					'energy_max'			=> $planet->energy_max + (($element_type->name_clean === 'solar_plant') ? (22 * ($building->level + 1) * $building->multiplier) : 0),
 					'metal_mine'			=> $planet->metal_mine + (($element_type->name_clean === 'metal_mine') ? 1 : 0),
 					'crystal_mine'			=> $planet->crystal_mine + (($element_type->name_clean === 'crystal_mine') ? 1 : 0),
-					'deuterium_sintetizer'	=> $planet->deuterium_sintetizer + (($element_type->name_clean === 'deuterium_sintetizer') ? 1 : 0),
+					'deuterium_synthesizer'	=> $planet->deuterium_synthesizer + (($element_type->name_clean === 'deuterium_synthesizer') ? 1 : 0),
 					'solar_plant'			=> $planet->solar_plant + (($element_type->name_clean === 'solar_plant') ? 1 : 0)
 				);
 
