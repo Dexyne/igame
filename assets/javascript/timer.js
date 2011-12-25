@@ -16,11 +16,14 @@ $(function(){
 				$.ajax({
 					url: 		'queue/edit/' + id,
 					success: 	function(){
-						document.location.href = "http://192.168.233.129:2001/index.php/game/building.html";
+						document.location.href = "http://" + document.location.host + "/game/building.html";
+					},
+					error: 		function(){
+						document.location.href = "http://" + document.location.host + "/game/building.html";
 					}
 				});
 			} else {
-				$remainingTime.text(difference + " sec restantes…");
+				$remainingTime.text(Math.floor(difference / 60) + " sec restantes…");
 			}			
 		});
 	}
