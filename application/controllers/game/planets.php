@@ -76,8 +76,7 @@ class Planets extends CI_Controller {
 	 */
 	public function edit($planet_id = '')
 	{
-		// Level du batiment, est normalement enregistrer en db, ici c'est pour les tests
-		$building_metal = 2;
+		// Ressources par heures à définir
 		$metal_per_hour = 50;
 
 		if(isset($planet_id) && !empty($planet_id) && is_int($planet_id) || isset($planet_id) && !empty($planet_id) && ctype_digit($planet_id)) {
@@ -100,14 +99,14 @@ class Planets extends CI_Controller {
 				'planet'				=> $data_planet->planet,
 				'created_at'			=> $data_planet->created_at,
 				'updated_at'			=> 'NOW()',
-				'metal'					=> $data_planet->metal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
-				'crystal'				=> $data_planet->crystal + ($building_metal * $metal_per_hour * ($seconds / 3600)),
-				'deuterium'				=> $data_planet->deuterium + ($building_metal * $metal_per_hour * ($seconds / 3600)),
+				'metal'					=> $data_planet->metal + ($data_planet->metal_mine * $metal_per_hour * ($seconds / 3600)),
+				'crystal'				=> $data_planet->crystal + ($data_planet->crystal_mine * $metal_per_hour * ($seconds / 3600)),
+				'deuterium'				=> $data_planet->deuterium + ($data_planet->deuterium_synthesizer * $metal_per_hour * ($seconds / 3600)),
 				'energy_used'			=> $data_planet->energy_used,
 				'energy_max'			=> $data_planet->energy_max,
 				'metal_mine'			=> $data_planet->metal_mine,
 				'crystal_mine'			=> $data_planet->crystal_mine,
-				'deuterium_sintetizer'	=> $data_planet->deuterium_sintetizer,
+				'deuterium_synthesizer'	=> $data_planet->deuterium_synthesizer,
 				'solar_plant'			=> $data_planet->solar_plant
 			);
 

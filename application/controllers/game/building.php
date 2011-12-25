@@ -46,9 +46,9 @@ class Building extends CI_Controller {
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
 			$data['building_list'] = $this->building->get_allBuilding();
-			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_sintetizer, solar_plant'));
+			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant'));
 
-			$b = array('metal_mine', 'crystal_mine', 'deuterium_sintetizer', 'solar_plant');
+			$b = array('metal_mine', 'crystal_mine', 'deuterium_synthesizer', 'solar_plant');
 
 			for($i = 0; $i < count($data['building_list']); $i++) {
 				$data['building_list'][$i]->level = $building_level->$b[$i];
@@ -56,7 +56,7 @@ class Building extends CI_Controller {
 
 			$data['in_queue'] = $this->queue->into('building', $this->session->userdata('planet_id'));
 
-			$this->load->view('game/building/show', $data);
+			$this->load->view('game/building/index', $data);
 		} else {
 			$this->login();
 		}
