@@ -25,9 +25,9 @@
  * #######################################################################
  */
 
-class Building_model extends CI_Model {
+class Ship_model extends CI_Model {
 
-	protected $_table = 'building';
+	protected $_table = 'ship';
 
 	public function get_all()
 	{

@@ -82,6 +82,15 @@ class Planet_model extends CI_Model {
 			->set('deuterium', $data['deuterium'])
 			->set('energy_used', $data['energy_used'])
 			->set('energy_max', $data['energy_max'])
+			->set('metal_mine', $data['metal_mine'])
+			->set('crystal_mine', $data['crystal_mine'])
+			->set('deuterium_synthesizer', $data['deuterium_synthesizer'])
+			->set('solar_plant', $data['solar_plant'])
+			->set('laboratory', $data['laboratory'])
+			->set('yardspace', $data['yardspace'])
+			->set('ion', $data['ion'])
+			->set('laser', $data['laser'])
+			->set('plasma', $data['plasma'])
 			->insert($this->_table);
 	}
 
@@ -104,6 +113,11 @@ class Planet_model extends CI_Model {
 			->set('crystal_mine', $data['crystal_mine'])
 			->set('deuterium_synthesizer', $data['deuterium_synthesizer'])
 			->set('solar_plant', $data['solar_plant'])
+			->set('laboratory', $data['laboratory'])
+			->set('yardspace', $data['yardspace'])
+			->set('ion', $data['ion'])
+			->set('laser', $data['laser'])
+			->set('plasma', $data['plasma'])
 			->where('id', $id)
 			->update($this->_table);
 	}

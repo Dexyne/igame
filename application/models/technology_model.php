@@ -25,9 +25,9 @@
  * #######################################################################
  */
 
-class Building_model extends CI_Model {
+class Technology_model extends CI_Model {
 
-	protected $_table = 'building';
+	protected $_table = 'technologies';
 
 	public function get_all()
 	{
