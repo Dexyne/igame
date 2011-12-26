@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>iGame <?php if(isset($title)) echo "- {$title}"; ?></title>
-		<link rel="stylesheet" href="<?php echo css_url('bootstrap') ?>" />
+		<link rel="stylesheet" href="<?php echo css_url('bootstrap.min') ?>" />
 		<link rel="stylesheet" href="<?php echo css_url('style') ?>" />
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

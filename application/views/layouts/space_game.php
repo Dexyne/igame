@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>iGame <?php if(isset($title)) echo "- {$title}"; ?></title>
-		<link rel="stylesheet" href="<?php echo css_url('bootstrap') ?>" />
+		<link rel="stylesheet" href="<?php echo css_url('bootstrap.min') ?>" />
 		<link rel="stylesheet" href="<?php echo css_url('style') ?>" />
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -19,9 +19,9 @@
 					<ul>
 						<li><?php echo anchor('game/', "Vue générale"); ?></li>
 						<li><?php echo anchor('game/building', "Bâtiments"); ?></li>
-						<li><?php echo anchor('game/', "Laboratoire"); ?></li>
-						<li><?php echo anchor('game/', "Chantier spatial"); ?></li>
-						<li><?php echo anchor('game/', "Défense"); ?></li>
+						<li><?php echo anchor('game/laboratory', "Laboratoire"); ?></li>
+						<li><?php echo anchor('game/yardspace', "Chantier spatial"); ?></li>
+						<li><?php echo anchor('game/defense', "Défense"); ?></li>
 					</ul>					
 				</div>
 				<div class="content">
