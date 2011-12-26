@@ -64,4 +64,78 @@ class Laboratory extends CI_Controller {
 			redirect('users/login');
 		}
 	}
+
+	/**
+	 | Fiche détaillant une technologie
+	 * @param $id de la technologie
+	 * @return view
+	 */
+	public function show($id = '')
+	{
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			if(isset($id) && ctype_digit($id)) {
+				$data['technology'] = current($this->technology->get_technology($id));
+
+				$this->load->view('game/laboratory/show', $data);
+			} else {
+				$this->index();
+			}
+		} else {
+			redirect('users/login');
+		}
+	}
+
+	/**
+	 | Permet la recherche d'une technologie
+	 * @param $id de la technologie
+	 * @return view
+	 */
+	public function create($id = '')
+	{
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			$data = array();
+
+			if(isset($id) && ctype_digit($id)) {
+				$building_type = current($this->building->get_building($id, 'name, name_clean, construct_time, multiplier'));
+				$building_name = $building_type->name_clean;
+				$building = current($this->planet_model->get_planet($this->session->userdata('planet_id'), $building_name));
+				$building->level = $building->$building_name;
+
+				if(isset($building_type) && !empty($building_type)) {
+					// mktime(int hour, int minute, int second, int month, int day, int year)
+					$date_now_in_tsp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));
+					$date_finish_in_tsp = $date_now_in_tsp + ($building_type->construct_time * ($building->level + 1) * $building_type->multiplier);
+
+					$data = array(
+						'element_id'	=> $id,
+						'element_type'	=> 'building',
+						'planet_id'		=> $this->session->userdata('planet_id'),
+						'time_start'	=> 'NOW()',
+						'time_finish'	=> '\''.date('Y-m-d H:i:s', $date_finish_in_tsp).'\''
+					);					
+
+					if($this->queue->insert($data)) {
+						$data['notif']['type'] = 'success';
+						$data['notif']['message'] = "{$building_type->name} en cours de construction.";
+					} else {
+						$data['notif']['type'] = 'error';
+						$data['notif']['message'] = "Une erreur est survenue.";
+					}
+
+					$this->index($data);
+				} else {
+					$data['notif']['type'] = 'warning';
+					$data['notif']['message'] = "Le bâtiment demandé n'existe pas.";
+
+					$this->index($data);
+				}
+			} else {
+				$this->index();
+			}
+		} else {
+			redirect('users/login');
+		}
+	}
 }

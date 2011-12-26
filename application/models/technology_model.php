@@ -37,8 +37,8 @@ class Technology_model extends CI_Model {
 			->result();
 	}
 
-	// Retourne les données du bâtiment demandé
-	public function get_building($id, $select = '*')
+	// Retourne les données de la technologie demandé
+	public function get_technology($id, $select = '*')
 	{
 		return $this->db->select($select)
 			->from($this->_table)
