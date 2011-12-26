@@ -7,10 +7,10 @@
 <?php if(isset($in_queue) && !empty($in_queue)) : ?>
 		<ul>
 		<?php foreach($in_queue as $in) : 
-			for($i = 0; $i < count($building_list); $i++) :
-				if($in->element_id == $building_list[$i]->id): ?>
+			for($i = 0; $i < count($list); $i++) :
+				if($in->element_id == $list[$i]->id): ?>
 					<li class="construction" data-id="<?php echo $in->id ?>" data-finish-at="<?php echo $in->time_finish ?>">
-						<?php echo $building_list[$i]->name ?><span class="pull-right">
+						<?php echo $list[$i]->name ?><span class="pull-right">
 						Temps restant : <span class="remaining-time">...</span></span>
 					</li>
 		<?php endif; endfor; endforeach; ?>
@@ -29,17 +29,16 @@
 		<th>Level</th>
 		<th>Actions</th>
 	</tr>
-<?php //echo '<pre>'; print_r($building_list); echo '</pre>'; 
-foreach($building_list as $building) : ?>
+<?php foreach($list as $building) : ?>
 	<tr>
 		<td><?php echo img("building/{$building->name_clean}.gif", "Illustration : {$building->name}", $building->name) ?></td>
 		<td>
 			<h4>
-				<?php echo $building->name ?>
+				&lsaquo;<?php echo anchor('#', $building->name, 'class="anchor"') ?>&rsaquo;
 			<?php if($building->important > 0)
 				echo '<span class="label important">Important</span>'; ?>
 			</h4>
-			<p><?php echo $building->content ?></p>
+			<p><?php echo $building->introduction ?></p>
 			<dl>
 				<dt>Ressource(s) nécessaire(s) :<dt>
 				<dd>
@@ -52,7 +51,13 @@ foreach($building_list as $building) : ?>
 					<?php if(!is_null($building->energy)) echo img('icons/energy.gif', 'énergie', 'Energie')
 					.(floor($building->energy * ($building->level + 1) * $building->multiplier)) ?>
 				</dd>
-				<dd>Temps de construction : <?php echo (($building->construct_time * ($building->level + 1) * $building->multiplier) / 60) ?> minutes</dd>
+				<dd>Temps de construction : 
+				<?php if($building->construct_time > 0) :
+					echo (($building->construct_time * ($building->level + 1) * $building->multiplier) / 60) ?> minutes
+				<?php else :
+					echo '<span class="label notice">Instantané</span>';
+				endif; ?>
+				</dd>
 			</dl>
 		</td>
 		<td class="center">
