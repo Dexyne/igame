@@ -40,7 +40,7 @@
 			<td><?php echo img("technologies/{$technology->name_clean}.gif", "Illustration : {$technology->name}", $technology->name) ?></td>
 			<td>
 				<h4>
-					&lsaquo;<?php echo anchor('#', $technology->name, 'class="anchor"') ?>&rsaquo;
+					&lsaquo;<?php echo anchor('game/laboratory/show/'.$technology->id, $technology->name, 'class="anchor"') ?>&rsaquo;
 				<?php if($technology->important > 0)
 					echo '<span class="label important">Important</span>'; ?>
 				</h4>

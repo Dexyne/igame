@@ -34,7 +34,7 @@
 		<td><?php echo img("building/{$building->name_clean}.gif", "Illustration : {$building->name}", $building->name) ?></td>
 		<td>
 			<h4>
-				&lsaquo;<?php echo anchor('#', $building->name, 'class="anchor"') ?>&rsaquo;
+				&lsaquo;<?php echo anchor('game/building/show/'.$building->id, $building->name, 'class="anchor"') ?>&rsaquo;
 			<?php if($building->important > 0)
 				echo '<span class="label important">Important</span>'; ?>
 			</h4>
