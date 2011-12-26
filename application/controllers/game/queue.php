@@ -62,7 +62,13 @@ class Queue extends CI_Controller {
 					'metal_mine'			=> $planet->metal_mine + (($element_type->name_clean === 'metal_mine') ? 1 : 0),
 					'crystal_mine'			=> $planet->crystal_mine + (($element_type->name_clean === 'crystal_mine') ? 1 : 0),
 					'deuterium_synthesizer'	=> $planet->deuterium_synthesizer + (($element_type->name_clean === 'deuterium_synthesizer') ? 1 : 0),
-					'solar_plant'			=> $planet->solar_plant + (($element_type->name_clean === 'solar_plant') ? 1 : 0)
+					'solar_plant'			=> $planet->solar_plant + (($element_type->name_clean === 'solar_plant') ? 1 : 0),
+					'factory_robots'		=> $planet->factory_robots + (($element_type->name_clean === 'factory_robots') ? 1 : 0),
+					'laboratory'			=> $planet->laboratory,
+					'yardspace'				=> $planet->yardspace,
+					'ion'					=> $planet->ion,
+					'laser'					=> $planet->laser,
+					'plasma'				=> $planet->plasma
 				);
 
 				if($this->planet_model->update($this->session->userdata('planet_id'), $data) && $this->queue->delete($id)) {

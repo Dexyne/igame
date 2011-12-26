@@ -45,20 +45,41 @@ class Building extends CI_Controller {
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
-			$data['building_list'] = $this->building->get_allBuilding();
-			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant'));
+			$data['list'] = $this->building->get_all();
+			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant, factory_robots'));
 
-			$b = array('metal_mine', 'crystal_mine', 'deuterium_synthesizer', 'solar_plant');
+			$b = array('metal_mine', 'crystal_mine', 'deuterium_synthesizer', 'solar_plant', 'factory_robots');
 
-			for($i = 0; $i < count($data['building_list']); $i++) {
-				$data['building_list'][$i]->level = $building_level->$b[$i];
+			for($i = 0; $i < count($data['list']); $i++) {
+				$data['list'][$i]->level = $building_level->$b[$i];
 			}
 
 			$data['in_queue'] = $this->queue->into('building', $this->session->userdata('planet_id'));
 
 			$this->load->view('game/building/index', $data);
 		} else {
-			$this->login();
+			redirect('users/login');
+		}
+	}
+
+	/**
+	 | Fiche détaillant un bâtiment
+	 * @param $id du bâtiment
+	 * @return view
+	 */
+	public function show($id = '')
+	{
+		if($this->session->userdata('email') || $this->session->userdata('logged'))
+		{
+			if(isset($id) && ctype_digit($id)) {
+				$data['building'] = current($this->building->get_building($id));
+
+				$this->load->view('game/building/show', $data);
+			} else {
+				$this->index();
+			}
+		} else {
+			redirect('users/login');
 		}
 	}
 
