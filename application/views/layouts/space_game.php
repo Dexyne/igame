@@ -21,7 +21,7 @@
 						<li><?php echo anchor('game/building', "Bâtiments"); ?></li>
 						<li><?php echo anchor('game/laboratory', "Laboratoire"); ?></li>
 						<li><?php echo anchor('game/yardspace', "Chantier spatial"); ?></li>
-						<li><?php echo anchor('game/defense', "Défense"); ?></li>
+						<li><?php echo anchor('game/defenses', "Défense"); ?></li>
 					</ul>					
 				</div>
 				<div class="content">
