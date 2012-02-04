@@ -10,8 +10,8 @@
 			for($i = 0; $i < count($list); $i++) :
 				if($in->element_id == $list[$i]->id): ?>
 					<li class="construction" data-id="<?php echo $in->id ?>" data-finish-at="<?php echo $in->time_finish ?>">
-						<?php echo $list[$i]->name ?><span class="pull-right">
-						Temps restant : <span class="remaining-time">...</span></span>
+						<?php echo $list[$i]->name ?>
+						<span class="pull-right">Temps restant : <span class="remaining-time">...</span></span>
 					</li>
 		<?php endif; endfor; endforeach; ?>
 		</ul>
