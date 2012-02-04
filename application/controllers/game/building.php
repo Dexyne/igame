@@ -34,25 +34,53 @@ class Building extends CI_Controller {
 		parent::__construct();
 		$this->load->model('building_model', 'building');
 		$this->load->model('queue_model', 'queue');
+		$this->load->model('dependencies_model', 'dependencies');
 	}
 
 	/**
 	 | Affiche la liste de tous les bâtiments disponible et ceux en construction
 	 * @param $data = array()
-	 * @return view
+	 * @return void
 	 */
 	public function index($data = array())
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
 			$data['list'] = $this->building->get_all();
-			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant, factory_robots'));
+			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant, factory_robots, yardspace'));
+			$dependencies = $this->dependencies->get_allForType('building');
 
-			$b = array('metal_mine', 'crystal_mine', 'deuterium_synthesizer', 'solar_plant', 'factory_robots');
+			$b = array('metal_mine', 'crystal_mine', 'deuterium_synthesizer', 'solar_plant', 'factory_robots', 'yardspace');
 
 			for($i = 0; $i < count($data['list']); $i++) {
 				$data['list'][$i]->level = $building_level->$b[$i];
 			}
+
+			// On récupère tous les ids des bâtiments et la liste des levels
+			foreach($data['list'] as $list) {
+				$building_ids[] = $list->id;
+				$building_levels[$list->id] = $list->level;
+			}
+
+			// On vérifie si une dépendance existe. Si oui, on regarde si le level est ok et si ce n'est pas le cas on retire l'élément
+			for($i = 0; $i < count($dependencies); $i++) {
+				$dep = in_array($dependencies[$i]->element_id, $building_ids);
+				if($dep) {
+					if($building_levels[$dependencies[$i]->needed_element_id] < $dependencies[$i]->needed_level) {
+						unset($data['list'][$dependencies[$i]->element_id-1]);
+					}
+				}
+			}
+
+			/*
+			 | Debug
+
+				echo '<br /><br><br><br />';
+				echo '<pre>'; print_r($building_ids); echo '</pre>';
+				echo '<pre>'; print_r($building_levels); echo '</pre>';
+				echo '<pre>'; print_r($data['list']); echo '</pre>';
+				echo '<pre>'; print_r($dependencies); echo '</pre>';
+			*/
 
 			$data['in_queue'] = $this->queue->into('building', $this->session->userdata('planet_id'));
 
@@ -65,7 +93,7 @@ class Building extends CI_Controller {
 	/**
 	 | Fiche détaillant un bâtiment
 	 * @param $id du bâtiment
-	 * @return view
+	 * @return void
 	 */
 	public function show($id = '')
 	{
@@ -86,7 +114,7 @@ class Building extends CI_Controller {
 	/**
 	 | Permet la construction d'un bâtiment
 	 * @param $id du bâtiment
-	 * @return view
+	 * @return void
 	 */
 	public function create($id = '')
 	{
@@ -111,7 +139,7 @@ class Building extends CI_Controller {
 						'planet_id'		=> $this->session->userdata('planet_id'),
 						'time_start'	=> 'NOW()',
 						'time_finish'	=> '\''.date('Y-m-d H:i:s', $date_finish_in_tsp).'\''
-					);					
+					);
 
 					if($this->queue->insert($data)) {
 						$data['notif']['type'] = 'success';
