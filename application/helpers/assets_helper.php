@@ -12,7 +12,7 @@ if ( ! function_exists('js_url'))
 {
 	function js_url($name)
 	{
-		return base_url() . 'assets/javascript/' . $name . '.js';
+		return base_url() . 'assets/javascripts/' . $name . '.js';
 	}
 }
 
