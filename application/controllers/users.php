@@ -156,6 +156,8 @@ class Users extends CI_Controller {
 			
 			if($this->session->userdata('id') === $id || is_null($id))
 				$data['user_profile'] = True;
+			else
+				$data['user_profile'] = False;
 
 			$this->load->view('users/show', $data);
 		} else {
