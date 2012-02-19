@@ -15,26 +15,32 @@
 
 		<div class="container">
 			<div class="container-fluid">
-				<div class="sidebar">
-					<ul>
-						<li><?php echo anchor('game/', "Vue générale"); ?></li>
-						<li><?php echo anchor('game/building', "Bâtiments"); ?></li>
-						<li><?php echo anchor('game/laboratory', "Laboratoire"); ?></li>
-						<li><?php echo anchor('game/yardspace', "Chantier spatial"); ?></li>
-						<li><?php echo anchor('game/defenses', "Défense"); ?></li>
-					</ul>					
-				</div>
-				<div class="content">
-					{{ content_for_layout }}	
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="span3">
+							<div class="well sidebar-nav">
+								<ul class="nav nav-list">
+									<li class="nav-header">Menu</li>
+									<li><?php echo anchor('game/', "Vue générale"); ?></li>
+									<li><?php echo anchor('game/building', "Bâtiments"); ?></li>
+									<li><?php echo anchor('game/laboratory', "Laboratoire"); ?></li>
+									<li><?php echo anchor('game/yardspace', "Chantier spatial"); ?></li>
+									<li><?php echo anchor('game/defenses', "Défense"); ?></li>
+								</ul>
+							</div>
+						</div>
+						<div class="content span8">
+							{{ content_for_layout }}
+						</div>
+					</div>
 				</div>
 			</div>
-			
+
 			<footer class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</footer>
 		</div>
 
-		<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-		<script type="text/javascript" src="<?php echo js_url('bootstrap-alerts'); ?>"></script>
-		<script type="text/javascript" src="<?php echo js_url('bootstrap-dropdown'); ?>"></script>
-		<script type="text/javascript" src="<?php echo js_url('timer'); ?>"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="<?php echo js_url('bootstrap.min'); ?>"></script>
+		<script src="<?php echo js_url('timer'); ?>"></script>
 	</body>
 </html>

@@ -3,10 +3,10 @@
 	<h1>Bâtiments</h1>
 </div>
 
-<div class="alert-message warning" data-alert="alert">
+<div class="alert" data-alert="alert">
 <?php if(isset($in_queue) && !empty($in_queue)) : ?>
 		<ul>
-		<?php foreach($in_queue as $in) : 
+		<?php foreach($in_queue as $in) :
 			for($i = 0; $i < count($list); $i++) :
 				if($in->element_id == $list[$i]->id): ?>
 					<li class="construction" data-id="<?php echo $in->id ?>" data-finish-at="<?php echo $in->time_finish ?>">
@@ -16,7 +16,7 @@
 		<?php endif; endfor; endforeach; ?>
 		</ul>
 <?php else : ?>
-		<p>Aucun bâtiment en cours de construction.</p>
+		Aucun bâtiment en cours de construction.
 <?php endif; ?>
 </div>
 
@@ -36,7 +36,7 @@
 			<h4>
 				&lsaquo;<?php echo anchor('game/building/show/'.$building->id, $building->name, 'class="anchor"') ?>&rsaquo;
 			<?php if($building->important > 0)
-				echo '<span class="label important">Important</span>'; ?>
+				echo '<span class="label label-important">Important</span>'; ?>
 			</h4>
 			<p><?php echo $building->introduction ?></p>
 			<dl>
@@ -51,11 +51,11 @@
 					<?php if(!is_null($building->energy)) echo img('icons/energy.gif', 'énergie', 'Energie')
 					.(floor($building->energy * ($building->level + 1) * $building->multiplier)) ?>
 				</dd>
-				<dd>Temps de construction : 
+				<dd>Temps de construction :
 				<?php if($building->construct_time > 0) :
 					echo (($building->construct_time * ($building->level + 1) * $building->multiplier) / 60) ?> minutes
 				<?php else :
-					echo '<span class="label notice">Instantané</span>';
+					echo '<span class="label label-notice">Instantané</span>';
 				endif; ?>
 				</dd>
 			</dl>
@@ -65,5 +65,5 @@
 		</td>
 		<td><?php echo anchor("game/building/create/{$building->id}", "Construire ?"); ?></td>
 	</tr>
-<?php endforeach; ?>		
+<?php endforeach; ?>
 </table>

@@ -4,15 +4,15 @@
 </div>
 
 <?php if(isset($existing)) : ?>
-	<div class="alert-message warning" data-alert="alert">
+	<div class="alert alert" data-alert="alert">
 		Le chantier spatial n'est pas encore disponible, aucun vaisseau ne peut être construit.
 	</div>
 
 <?php else : ?>
-	<div class="alert-message warning" data-alert="alert">
+	<div class="alert alert-warning" data-alert="alert">
 	<?php if(isset($in_queue) && !empty($in_queue)) : ?>
 			<ul>
-			<?php foreach($in_queue as $in) : 
+			<?php foreach($in_queue as $in) :
 				for($i = 0; $i < count($list); $i++) :
 					if($in->element_id == $list[$i]->id): ?>
 						<li class="construction" data-id="<?php echo $in->id ?>" data-finish-at="<?php echo $in->time_finish ?>">
@@ -42,7 +42,7 @@
 				<h4>
 					<?php echo $ship->name ?>
 				<?php if($ship->important > 0)
-					echo '<span class="label important">Important</span>'; ?>
+					echo '<span class="label label-important">Important</span>'; ?>
 				</h4>
 				<p><?php echo $ship->content ?></p>
 				<dl>
@@ -65,7 +65,7 @@
 			</td>
 			<td><?php echo anchor("game/ship/create/{$ship->id}", "Construire ?"); ?></td>
 		</tr>
-	<?php endforeach; ?>		
+	<?php endforeach; ?>
 	</table>
 
 <?php endif; ?>

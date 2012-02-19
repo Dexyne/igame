@@ -4,15 +4,15 @@
 </div>
 
 <?php if(isset($existing)) : ?>
-	<div class="alert-message warning" data-alert="alert">
+	<div class="alert alert" data-alert="alert">
 		Le laboratoire n'est pas encore construit, aucune technologie ne peut donc être recherché.
 	</div>
 
 <?php else : ?>
-	<div class="alert-message warning" data-alert="alert">
+	<div class="alert alert-warning" data-alert="alert">
 	<?php if(isset($in_queue) && !empty($in_queue)) : ?>
 			<ul>
-			<?php foreach($in_queue as $in) : 
+			<?php foreach($in_queue as $in) :
 				for($i = 0; $i < count($list); $i++) :
 					if($in->element_id == $list[$i]->id): ?>
 						<li class="construction" data-id="<?php echo $in->id ?>" data-finish-at="<?php echo $in->time_finish ?>">
@@ -42,7 +42,7 @@
 				<h4>
 					&lsaquo;<?php echo anchor('game/laboratory/show/'.$technology->id, $technology->name, 'class="anchor"') ?>&rsaquo;
 				<?php if($technology->important > 0)
-					echo '<span class="label important">Important</span>'; ?>
+					echo '<span class="label label-important">Important</span>'; ?>
 				</h4>
 				<p><?php echo $technology->introduction ?></p>
 				<dl>
@@ -57,11 +57,11 @@
 						<?php if(!is_null($technology->energy)) echo img('icons/energy.gif', 'énergie', 'Energie')
 						.(floor($technology->energy * ($technology->level + 1) * $technology->multiplier)) ?>
 					</dd>
-					<dd>Temps de construction : 
+					<dd>Temps de construction :
 						<?php if($technology->construct_time > 0) :
 							echo floor((($technology->construct_time * ($technology->level + 1) * $technology->multiplier) / 60)) ?> minutes
 						<?php else :
-							echo '<span class="label notice">Instantané</span>';
+							echo '<span class="label label-notice">Instantané</span>';
 						endif; ?>
 					</dd>
 				</dl>
@@ -71,7 +71,7 @@
 			</td>
 			<td><?php echo anchor("game/laboratory/create/{$technology->id}", "Construire ?"); ?></td>
 		</tr>
-	<?php endforeach; ?>		
+	<?php endforeach; ?>
 	</table>
 
 <?php endif; ?>

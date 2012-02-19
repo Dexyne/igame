@@ -1,16 +1,18 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
+//!!!! Modifier pour prendre en compte les notifs sur une ligne ou en block, ainsi que les couleurs de fond
 if ( ! function_exists('notif'))
 {
 	function notif($notif = '', $message = '')
 	{
 		if(isset($notif) && !empty($notif) && isset($message) && !empty($message)) {
-			return 
-			"<div class=\"alert-message {$notif} fade in\" data-alert=\"alert\">
-				<a class=\"close\" href=\"#\">×</a>
+			return
+			"<div class=\"alert alert-{$notif} fade in\">
+				<a class=\"close\" data-dismiss=\"alert\" href=\"#\">×</a>
 				<p>{$message}</p>
 			</div>";
-		}	
+		}
 	}
 }
 
@@ -27,7 +29,7 @@ if ( ! function_exists('notif_list'))
 			$notification .= "</ul>";
 
 			return $notification;
-		}	
+		}
 	}
 }
 

@@ -4,7 +4,7 @@
 </div>
 
 <?php if(isset($is_existing)) : ?>
-	<div class="alert-message warning" data-alert="alert">
+	<div class="alert" data-alert="alert">
 		Le chantier spatial n'est pas encore disponible, aucune défense ne peut être construite.
 	</div>
 
@@ -25,7 +25,7 @@
 				<h4>
 					<?php echo $building->name ?>
 				<?php if($building->important > 0)
-					echo '<span class="label important">Important</span>'; ?>
+					echo '<span class="label label-important">Important</span>'; ?>
 				</h4>
 				<p><?php echo $building->content ?></p>
 				<dl>
@@ -48,7 +48,7 @@
 			</td>
 			<td><?php echo anchor("game/building/create/{$building->id}", "Construire ?"); ?></td>
 		</tr>
-	<?php endforeach; ?>		
+	<?php endforeach; ?>
 	</table>
 
 <?php endif; ?>

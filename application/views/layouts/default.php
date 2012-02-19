@@ -14,16 +14,20 @@
 		<?php require_once '_navigator.php' ?>
 
 		<div class="container">
-			<div class="content">
-				{{ content_for_layout }}	
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="content">
+							{{ content_for_layout }}
+						</div>
+					</div>
+				</div>
 			</div>
-			
+
 			<footer class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</footer>
 		</div>
 
-		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-		<script type="text/javascript" src="<?php echo js_url('less'); ?>"></script>
-		<script type="text/javascript" src="<?php echo js_url('bootstrap-alerts'); ?>"></script>
-		<script src="<?php echo js_url('bootstrap-dropdown'); ?>"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="<?php echo js_url('bootstrap.min'); ?>"></script>
 	</body>
 </html>
