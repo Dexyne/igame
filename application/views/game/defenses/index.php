@@ -9,7 +9,7 @@
 	</div>
 
 <?php else : ?>
-	<?php if(isset($notif)) : echo notif($notif['type'], $notif['message']); endif; ?>
+	<?php if(isset($notif)) : echo notif($notif['type'], $notif['message'], $notif['block'], $notif['heading']); endif; ?>
 
 	<table>
 		<tr>

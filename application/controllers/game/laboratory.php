@@ -36,7 +36,7 @@ class Laboratory extends CI_Controller {
 		$this->load->model('queue_model', 'queue');
 	}
 
-	public function index() 
+	public function index()
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
@@ -114,20 +114,26 @@ class Laboratory extends CI_Controller {
 						'planet_id'		=> $this->session->userdata('planet_id'),
 						'time_start'	=> 'NOW()',
 						'time_finish'	=> '\''.date('Y-m-d H:i:s', $date_finish_in_tsp).'\''
-					);					
+					);
 
 					if($this->queue->insert($data)) {
-						$data['notif']['type'] = 'success';
+						$data['notif']['type'] = 'alert-success';
 						$data['notif']['message'] = "{$building_type->name} en cours de construction.";
+						$data['notif']['block'] = false;
+						$data['notif']['heading'] = '';
 					} else {
-						$data['notif']['type'] = 'error';
+						$data['notif']['type'] = 'alert-error';
 						$data['notif']['message'] = "Une erreur est survenue.";
+						$data['notif']['block'] = false;
+						$data['notif']['heading'] = '';
 					}
 
 					$this->index($data);
 				} else {
-					$data['notif']['type'] = 'warning';
+					$data['notif']['type'] = 'alert-warning';
 					$data['notif']['message'] = "Le bâtiment demandé n'existe pas.";
+					$data['notif']['block'] = false;
+					$data['notif']['heading'] = '';
 
 					$this->index($data);
 				}

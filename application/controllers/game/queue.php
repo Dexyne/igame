@@ -24,7 +24,7 @@
  *
  * #######################################################################
  */
- 
+
 class Queue extends CI_Controller {
 
 	public function __construct()
@@ -65,7 +65,7 @@ class Queue extends CI_Controller {
 					'solar_plant'			=> $planet->solar_plant + (($element_type->name_clean === 'solar_plant') ? 1 : 0),
 					'factory_robots'		=> $planet->factory_robots + (($element_type->name_clean === 'factory_robots') ? 1 : 0),
 					'laboratory'			=> $planet->laboratory,
-					'yardspace'				=> $planet->yardspace,
+					'yardspace'				=> $planet->yardspace + (($element_type->name_clean === 'yardspace') ? 1 : 0),
 					'ion'					=> $planet->ion,
 					'laser'					=> $planet->laser,
 					'plasma'				=> $planet->plasma

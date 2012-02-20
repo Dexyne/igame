@@ -51,7 +51,7 @@ class Users extends CI_Controller {
 		{
 			redirect('users/show');
 		}
-		
+
 		$data = array();
 		$data['title'] = "S'inscrire";
 
@@ -74,16 +74,22 @@ class Users extends CI_Controller {
 			if($this->user->save($data['user'])) {
 				$data['notif']['type'] = 'success';
 				$data['notif']['message'] = "Inscription réussie.";
+				$data['notif']['block'] = false;
+				$data['notif']['heading'] = '';
 			} else {
 				$data['notif']['type'] = 'warning';
 				$data['notif']['message'] = "Une erreur est survenue au cours de l'opération.";
+				$data['notif']['block'] = false;
+				$data['notif']['heading'] = '';
 			}
 
 			$this->login($data);
 		} else {
 			$data['notif']['type'] = 'error';
 			$data['notif']['message'] = validation_errors();
-					
+			$data['notif']['block'] = false;
+			$data['notif']['heading'] = '';
+
 			$this->load->view('users/form_register', $data);
 		}
 	}
@@ -97,7 +103,7 @@ class Users extends CI_Controller {
 
 		$data['title'] = "Connexion";
 
-		if($this->input->post('user')) 
+		if($this->input->post('user'))
 		{
 			$this->form_validation->set_rules('user[login]', 'Email', 'trim|required|valid_email|xss_clean');
 			$this->form_validation->set_rules('user[password]', 'Mot de passe', 'trim|required|xss_clean');
@@ -126,12 +132,16 @@ class Users extends CI_Controller {
 				} else {
 					$data['notif']['type'] = 'error';
 					$data['notif']['message'] = "Votre identifiant / mot de passe est incorrect.";
+					$data['notif']['block'] = false;
+					$data['notif']['heading'] = '';
 
 					$this->load->view('users/form_login', $data);
 				}
 			} else {
 				$data['notif']['type'] = 'error';
 				$data['notif']['message'] = validation_errors();
+				$data['notif']['block'] = false;
+				$data['notif']['heading'] = '';
 
 				$this->load->view('users/form_login', $data);
 			}
@@ -153,7 +163,7 @@ class Users extends CI_Controller {
 				redirect('home');
 			else
 				$data['user'] = current($this->user->get_userById($this->session->userdata('id')));
-			
+
 			if($this->session->userdata('id') === $id || is_null($id))
 				$data['user_profile'] = True;
 			else
@@ -201,20 +211,26 @@ class Users extends CI_Controller {
 				if($this->user->update($id, $data['user'])) {
 					$data['notif']['type'] = 'success';
 					$data['notif']['message'] = "Mise à jour réussie.";
+					$data['notif']['block'] = false;
+					$data['notif']['heading'] = '';
 				} else {
 					$data['notif']['type'] = 'warning';
 					$data['notif']['message'] = "Une erreur est survenue au cours de l'opération.";
+					$data['notif']['block'] = false;
+					$data['notif']['heading'] = '';
 				}
 
 				redirect('users/show');
 			} else {
 				$data['notif']['type'] = 'error';
 				$data['notif']['message'] = validation_errors();
+				$data['notif']['block'] = false;
+				$data['notif']['heading'] = '';
 
 				$data['user'] = current($this->user->get_userById($id));
 
 				$this->load->view('users/form_edit', $data);
-			}			
+			}
 		} else {
 			redirect(base_url());
 		}
@@ -226,13 +242,13 @@ class Users extends CI_Controller {
 		{
 			$this->session->sess_destroy();
 		}
-		
+
 		redirect(base_url());
 	}
 
 	function password_check($password)
 	{
-		if (isset($_POST['new_user']) && $password != $_POST['new_user']['pass_conf'] 
+		if (isset($_POST['new_user']) && $password != $_POST['new_user']['pass_conf']
 			|| isset($_POST['edit_user']) && $password != $_POST['edit_user']['pass_conf'])
 		{
 			$this->form_validation->set_message('password_check', "Le mot de passe et sa confirmation doivent semblable.");
