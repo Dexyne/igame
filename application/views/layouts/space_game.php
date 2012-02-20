@@ -16,7 +16,6 @@
 		<div class="container">
 			<div class="container-fluid">
 				<div class="row-fluid">
-					<div class="span12">
 						<div class="span3">
 							<div class="well sidebar-nav">
 								<ul class="nav nav-list">
@@ -29,10 +28,9 @@
 								</ul>
 							</div>
 						</div>
-						<div class="content span8">
+						<div class="content span9">
 							{{ content_for_layout }}
 						</div>
-					</div>
 				</div>
 			</div>
 
