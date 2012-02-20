@@ -65,7 +65,7 @@ class Planets extends CI_Controller {
 
 			$this->edit($data['planet_select']->id);
 		}
-		
+
 		redirect('game/home');
 	}
 
@@ -107,14 +107,20 @@ class Planets extends CI_Controller {
 				'metal_mine'			=> $data_planet->metal_mine,
 				'crystal_mine'			=> $data_planet->crystal_mine,
 				'deuterium_synthesizer'	=> $data_planet->deuterium_synthesizer,
-				'solar_plant'			=> $data_planet->solar_plant
+				'solar_plant'			=> $data_planet->solar_plant,
+				'factory_robots'		=> $data_planet->factory_robots,
+				'laboratory'			=> $data_planet->laboratory,
+				'yardspace'				=> $data_planet->yardspace,
+				'ion'					=> $data_planet->ion,
+				'laser'					=> $data_planet->laser,
+				'plasma'				=> $data_planet->plasma
 			);
 
 			// On met à jour les données de la planète
 			return $this->planet_model->update($planet_id, $data);
 		} else {
-			redirect('game/home');	
-		}		
+			redirect('game/home');
+		}
 	}
 }
 

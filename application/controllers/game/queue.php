@@ -64,11 +64,11 @@ class Queue extends CI_Controller {
 					'deuterium_synthesizer'	=> $planet->deuterium_synthesizer + (($element_type->name_clean === 'deuterium_synthesizer') ? 1 : 0),
 					'solar_plant'			=> $planet->solar_plant + (($element_type->name_clean === 'solar_plant') ? 1 : 0),
 					'factory_robots'		=> $planet->factory_robots + (($element_type->name_clean === 'factory_robots') ? 1 : 0),
-					'laboratory'			=> $planet->laboratory,
+					'laboratory'			=> $planet->laboratory + (($element_type->name_clean === 'laboratory') ? 1 : 0),
 					'yardspace'				=> $planet->yardspace + (($element_type->name_clean === 'yardspace') ? 1 : 0),
-					'ion'					=> $planet->ion,
-					'laser'					=> $planet->laser,
-					'plasma'				=> $planet->plasma
+					'ion'					=> $planet->ion + (($element_type->name_clean === 'ion') ? 1 : 0),
+					'laser'					=> $planet->laser + (($element_type->name_clean === 'laser') ? 1 : 0),
+					'plasma'				=> $planet->plasma + (($element_type->name_clean === 'plasma') ? 1 : 0)
 				);
 
 				if($this->planet_model->update($this->session->userdata('planet_id'), $data) && $this->queue->delete($id)) {
