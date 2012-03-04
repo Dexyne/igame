@@ -3,7 +3,7 @@
 	<h1>Chantier Spatial</h1>
 </div>
 
-<?php if(isset($existing)) : ?>
+<?php if(isset($existing) && $existing == false) : ?>
 	<div class="alert alert" data-alert="alert">
 		Le chantier spatial n'est pas encore disponible, aucun vaisseau ne peut être construit.
 	</div>
@@ -22,7 +22,7 @@
 			<?php endif; endfor; endforeach; ?>
 			</ul>
 	<?php else : ?>
-			<p>Aucun bâtiment en cours de construction.</p>
+			Aucun vaisseau en cours de construction.
 	<?php endif; ?>
 	</div>
 
@@ -39,11 +39,7 @@
 		<tr>
 			<td><?php echo img("ship/{$ship->name_clean}.gif", "Illustration : {$ship->name}", $ship->name) ?></td>
 			<td>
-				<h4>
-					<?php echo $ship->name ?>
-				<?php if($ship->important > 0)
-					echo '<span class="label label-important">Important</span>'; ?>
-				</h4>
+				<h4><?php echo $ship->name ?></h4>
 				<p><?php echo $ship->content ?></p>
 				<dl>
 					<dt>Ressource(s) nécessaire(s) :<dt>

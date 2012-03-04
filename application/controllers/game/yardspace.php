@@ -34,9 +34,10 @@ class Yardspace extends CI_Controller {
 		parent::__construct();
 		$this->load->model('ship_model', 'ship');
 		$this->load->model('queue_model', 'queue');
+		$this->load->model('dependencies_model', 'dependencies');
 	}
 
-	public function index() 
+	public function index()
 	{
 		if($this->session->userdata('email') || $this->session->userdata('logged'))
 		{
@@ -45,11 +46,36 @@ class Yardspace extends CI_Controller {
 			$data['list'] = $this->ship->get_all();
 			$level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'yardspace'));
 			$ys_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant'));
+			$building_level = current($this->planet_model->get_planet($this->session->userdata('planet_id'), 'metal_mine, crystal_mine, deuterium_synthesizer, solar_plant, factory_robots, yardspace'));
+			$dependencies = $this->dependencies->get_allForType('yardspace');
+
+			$b = array('metal_mine', 'crystal_mine', 'deuterium_synthesizer', 'solar_plant', 'factory_robots', 'yardspace');
+
+			for($i = 0; $i < count($data['list']); $i++) {
+				$data['list'][$i]->level = $building_level->$b[$i];
+			}
+
+			// On récupère tous les ids des bâtiments et la liste des levels
+			foreach($data['list'] as $list) {
+				$building_ids[] = $list->id;
+				$building_levels[$list->id] = $list->level;
+			}
+
+			// On vérifie si une dépendance existe. Si oui, on regarde si le level est ok et si ce n'est pas le cas on retire l'élément
+			for($i = 0; $i < count($dependencies); $i++) {
+				$dep = in_array($dependencies[$i]->element_id, $building_ids);
+				if($dep) {
+					if($building_levels[$dependencies[$i]->needed_element_id] < $dependencies[$i]->needed_level) {
+						unset($data['list'][$dependencies[$i]->element_id-1]);
+					}
+				}
+			}
+
 
 			if($level->yardspace == 0) {
-				$data['existing'] = True;
+				$data['existing'] = False;
 			} else {
-				$data['in_queue'] = $this->queue->into('building', $this->session->userdata('planet_id'));
+				$data['in_queue'] = $this->queue->into('yardspace', $this->session->userdata('planet_id'));
 			}
 
 			$this->load->view('game/yardspace/index', $data);
