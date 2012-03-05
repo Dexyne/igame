@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Sam 04 Février 2012 à 21:18
+-- Généré le : Lun 05 Mars 2012 à 23:10
 -- Version du serveur: 5.1.49
 -- Version de PHP: 5.3.3-7+squeeze3
 
@@ -24,7 +24,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Structure de la table `building`
 --
+-- Création: Sam 04 Février 2012 à 18:43
+--
 
+DROP TABLE IF EXISTS `building`;
 CREATE TABLE IF NOT EXISTS `building` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -59,7 +62,10 @@ INSERT INTO `building` (`id`, `name`, `name_clean`, `introduction`, `content`, `
 --
 -- Structure de la table `defenses`
 --
+-- Création: Lun 26 Décembre 2011 à 22:06
+--
 
+DROP TABLE IF EXISTS `defenses`;
 CREATE TABLE IF NOT EXISTS `defenses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -90,7 +96,10 @@ INSERT INTO `defenses` (`id`, `name`, `name_clean`, `introduction`, `content`, `
 --
 -- Structure de la table `dependencies`
 --
+-- Création: Sam 04 Février 2012 à 18:28
+--
 
+DROP TABLE IF EXISTS `dependencies`;
 CREATE TABLE IF NOT EXISTS `dependencies` (
   `element_id` int(11) NOT NULL,
   `needed_element_id` int(11) NOT NULL,
@@ -110,7 +119,11 @@ INSERT INTO `dependencies` (`element_id`, `needed_element_id`, `needed_level`, `
 --
 -- Structure de la table `igame_sessions`
 --
+-- Création: Sam 03 Décembre 2011 à 16:20
+-- Dernière modification: Dim 04 Mars 2012 à 20:33
+--
 
+DROP TABLE IF EXISTS `igame_sessions`;
 CREATE TABLE IF NOT EXISTS `igame_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
@@ -125,13 +138,18 @@ CREATE TABLE IF NOT EXISTS `igame_sessions` (
 -- Contenu de la table `igame_sessions`
 --
 
+INSERT INTO `igame_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('b3d4e3ab6a67ee55611cedeb021558de', '192.168.233.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11', 1330889613, 'a:6:{s:9:"user_data";s:0:"";s:8:"username";s:4:"test";s:5:"email";s:12:"test@mail.fr";s:2:"id";i:1;s:6:"logged";b:1;s:9:"planet_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `planets`
 --
+-- Création: Lun 26 Décembre 2011 à 22:24
+--
 
+DROP TABLE IF EXISTS `planets`;
 CREATE TABLE IF NOT EXISTS `planets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -164,15 +182,18 @@ CREATE TABLE IF NOT EXISTS `planets` (
 --
 
 INSERT INTO `planets` (`id`, `user_id`, `name`, `galaxy`, `system`, `planet`, `created_at`, `updated_at`, `metal`, `crystal`, `deuterium`, `energy_used`, `energy_max`, `metal_mine`, `crystal_mine`, `deuterium_synthesizer`, `solar_plant`, `factory_robots`, `laboratory`, `yardspace`, `ion`, `laser`, `plasma`) VALUES
-(1, 1, 'planète de test', 1, 1, 1, '2011-12-01 00:00:00', '2012-02-04 18:28:03', 198411.39564463, 201175.75833334, 154848.31111115, 203, 74, 4, 3, 2, 2, 0, 0, 0, 0, 0, 0),
-(2, 1, 'youpi', 1, 1, 3, '2011-12-02 00:00:00', '2011-12-26 19:16:58', 64453.04166668, 65095.32222223, 61641.12222223, 28, 20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(1, 1, 'planète de test', 1, 1, 1, '2011-12-01 00:00:00', '2012-03-04 20:33:37', 321440.61786683, 296940.42500000, 217675.42222226, 203, 74, 4, 3, 2, 2, 2, 0, 2, 0, 0, 0),
+(2, 1, 'youpi', 1, 1, 3, '2011-12-02 00:00:00', '2012-02-20 15:16:16', 131452.45833335, 65095.32222223, 61641.12222223, 28, 20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `queue`
 --
+-- Création: Jeu 08 Décembre 2011 à 19:38
+--
 
+DROP TABLE IF EXISTS `queue`;
 CREATE TABLE IF NOT EXISTS `queue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `element_id` int(11) NOT NULL,
@@ -181,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `queue` (
   `time_start` datetime NOT NULL,
   `time_finish` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `queue`
@@ -193,7 +214,10 @@ CREATE TABLE IF NOT EXISTS `queue` (
 --
 -- Structure de la table `ship`
 --
+-- Création: Dim 04 Mars 2012 à 19:46
+--
 
+DROP TABLE IF EXISTS `ship`;
 CREATE TABLE IF NOT EXISTS `ship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -204,22 +228,27 @@ CREATE TABLE IF NOT EXISTS `ship` (
   `crystal` int(11) DEFAULT NULL,
   `deuterium` int(11) DEFAULT NULL,
   `energy` int(11) DEFAULT NULL,
+  `multiplier` float NOT NULL DEFAULT '1.1',
   `construct_time` int(11) NOT NULL,
-  `previous_construct` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `ship`
 --
 
+INSERT INTO `ship` (`id`, `name`, `name_clean`, `introduction`, `content`, `metal`, `crystal`, `deuterium`, `energy`, `multiplier`, `construct_time`) VALUES
+(1, 'Petit transporteur', 'small_carrier', 'Le petit transporteur est un vaisseau très maniable et capable de transporter des matières premières sur d''autres planètes rapidement.', 'Le petit transporteur est un vaisseau très maniable et capable de transporter des matières premières sur d''autres planètes rapidement.', 2000, 2000, NULL, NULL, 1.1, 480);
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `technologies`
 --
+-- Création: Lun 26 Décembre 2011 à 06:01
+--
 
+DROP TABLE IF EXISTS `technologies`;
 CREATE TABLE IF NOT EXISTS `technologies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -251,7 +280,10 @@ INSERT INTO `technologies` (`id`, `name`, `name_clean`, `introduction`, `content
 --
 -- Structure de la table `users`
 --
+-- Création: Lun 19 Décembre 2011 à 19:42
+--
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
