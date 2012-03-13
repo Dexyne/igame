@@ -196,7 +196,7 @@ class Users extends CI_Controller {
 				$user = current($this->user->get_userById($id));
 
 				if(!empty($password))
-					$pass = $password;
+					$pass = sha1($password);
 				else
 					$pass = $user->password;
 
